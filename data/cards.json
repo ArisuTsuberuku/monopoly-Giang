@@ -1,0 +1,1119 @@
+{
+  "chance": [
+    {
+      "id": 1,
+      "type": "chance",
+      "title": "Thầy phong thủy gõ cửa",
+      "description": "Mời thầy về xem hướng đất, đổi vận tài lộc. Nộp 200 đồng phí lễ nghi.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 2,
+      "type": "chance",
+      "title": "Nghệ nhân gốm sứ",
+      "description": "Bình gốm Bát Tràng do bạn tự tay làm được đại gia mua đứt. Nhận 200 đồng.",
+      "action": "money",
+      "amount": 200
+    },
+    {
+      "id": 3,
+      "type": "chance",
+      "title": "Của đi thay người",
+      "description": "Làm rơi mất tiền trên đường đi chợ. Mất 150 đồng.",
+      "action": "pay",
+      "amount": 150
+    },
+    {
+      "id": 4,
+      "type": "chance",
+      "title": "Mối mọt ăn cột nhà",
+      "description": "Nhà gỗ ba gian bị mối xông, phải thuê thợ mộc về phun thuốc, đục đẽo lại. Mất 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 5,
+      "type": "chance",
+      "title": "Kim Bài Miễn Tử",
+      "description": "Thẻ này dùng để nhận 1 lần THOÁT TÙ MIỄN PHÍ.",
+      "action": "out_of_jail"
+    },
+    {
+      "id": 6,
+      "type": "chance",
+      "title": "Nam tiến khai hoang",
+      "description": "Theo chân lưu dân vào khai phá đất phương Nam. Di chuyển thẳng đến ô CÀ MAU.",
+      "action": "move_to",
+      "targetName": "Cà Mau"
+    },
+    {
+      "id": 7,
+      "type": "chance",
+      "title": "Lộc từ trên rơi xuống",
+      "description": "Trúng giải đặc biệt Xổ số Kiến thiết ngày Tết. Nhận 500 đồng.",
+      "action": "money",
+      "amount": 500
+    },
+    {
+      "id": 8,
+      "type": "chance",
+      "title": "Có thờ có thiêng",
+      "description": "Đầu năm đi lễ, cuối năm hưởng lộc. Nhận 150 đồng.",
+      "action": "money",
+      "amount": 150
+    },
+    {
+      "id": 9,
+      "type": "chance",
+      "title": "Hạn nặng năm tuổi",
+      "description": "Va quệt xe cộ đầu ngõ, phải đền tiền cho người ta. Trả 100 đồng cho mỗi người chơi khác.",
+      "action": "custom"
+    },
+    {
+      "id": 10,
+      "type": "chance",
+      "title": "Quà cáp cấp trên",
+      "description": "Gom đặc sản quê nhà mang đi biếu cá nhân có chức sắc để xin việc. Trừ 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 11,
+      "type": "chance",
+      "title": "Trẩy hội chùa Hương",
+      "description": "Di chuyển đến ô đất Hà Nội trẩy hội chùa Hương. Nếu đất đã có chủ, bạn phải trả tiền thuê gấp đôi.",
+      "action": "custom"
+    },
+    {
+      "id": 12,
+      "type": "chance",
+      "title": "Chạy lụt",
+      "description": "Nghe tin bão lớn, thu dọn đồ đạc chạy lên vùng cao. Lùi lại 3 ô so với vị trí hiện tại.",
+      "action": "move_relative",
+      "amount": -3
+    },
+    {
+      "id": 13,
+      "type": "chance",
+      "title": "Được tuổi làm nhà",
+      "description": "Năm nay làm tài đều tránh được; bạn được phép xây ngay 1 ngôi nhà trên đất của mình với giá nửa tiền.",
+      "action": "custom"
+    },
+    {
+      "id": 14,
+      "type": "chance",
+      "title": "Bán đất tổ tiên",
+      "description": "Bất động sản lâu năm bỗng lên cơn sốt đất. Bạn có thể bán một mảnh đất cho Ngân hàng với giá gấp đôi giá gốc.",
+      "action": "custom"
+    },
+    {
+      "id": 15,
+      "type": "chance",
+      "title": "Mất trộm đêm giao thừa",
+      "description": "Trộm lẻn vào nhà cuỗm mất con gà chọi và cặp giò lụa. Mua lại đồ cúng hết 150 đồng.",
+      "action": "pay",
+      "amount": 150
+    },
+    {
+      "id": 16,
+      "type": "chance",
+      "title": "Du hí Đảo Ngọc",
+      "description": "Cảnh biển Phú Quốc thật tươi đẹp. Bay đến ô AN GIANG để nghỉ dưỡng.",
+      "action": "move_to",
+      "targetName": "An Giang"
+    },
+    {
+      "id": 17,
+      "type": "chance",
+      "title": "Được mùa tiêu, điều, cà phê",
+      "description": "Nông sản Tây Nguyên xuất khẩu đi châu Âu được giá kỷ lục. Nhận 500 đồng.",
+      "action": "money",
+      "amount": 500
+    },
+    {
+      "id": 18,
+      "type": "chance",
+      "title": "Nghề truyền thống",
+      "description": "Thùng nước mắm cốt Phú Quốc của nhà bạn đạt giải vàng OCOP quốc gia. Nhận 400 đồng.",
+      "action": "money",
+      "amount": 400
+    },
+    {
+      "id": 19,
+      "type": "chance",
+      "title": "Đào được hũ vàng cổ",
+      "description": "Khi đào móng nhà, bạn vô tình phát hiện một hũ tiền cổ từ thời nhà Lê. Nhận 400 đồng.",
+      "action": "money",
+      "amount": 400
+    },
+    {
+      "id": 20,
+      "type": "chance",
+      "title": "Gói bánh chưng tết",
+      "description": "Đắt hàng dịp giáp Tết, thức trắng ba đêm canh nồi bánh. Nhận 150 đồng.",
+      "action": "money",
+      "amount": 150
+    },
+    {
+      "id": 21,
+      "type": "chance",
+      "title": "Đóng tiền phường (Họ)",
+      "description": "Đến lượt bạn phải đóng tiền phường cho chủ họ. Nộp 100 đồng.",
+      "action": "pay",
+      "amount": 100
+    },
+    {
+      "id": 22,
+      "type": "chance",
+      "title": "Từng bừng mùa nước nổi",
+      "description": "Gom được nguồn hàng bông điên điển và cá linh giá gốc, bỏ sỉ cho các nhà hàng lớn. Nhận 500 đồng.",
+      "action": "money",
+      "amount": 500
+    },
+    {
+      "id": 23,
+      "type": "chance",
+      "title": "Họ hàng gửi kiều hối",
+      "description": "Người thân từ nước ngoài bay về ăn Tết, lì xì cho bạn một khoản vốn lớn. Nhận 700 đồng.",
+      "action": "money",
+      "amount": 700
+    },
+    {
+      "id": 24,
+      "type": "chance",
+      "title": "Trúng giải hội làng",
+      "description": "Thắng cuộc thi nấu cơm niêu và kéo co dịp hội đầu xuân. Nhận 200 đồng.",
+      "action": "money",
+      "amount": 200
+    },
+    {
+      "id": 25,
+      "type": "chance",
+      "title": "Xuất khẩu nông sản",
+      "description": "Vải thiều năm nay được giá, xuất khẩu thuận lợi. Nhận 250 đồng.",
+      "action": "money",
+      "amount": 250
+    },
+    {
+      "id": 26,
+      "type": "chance",
+      "title": "Trời làm giông bão",
+      "description": "'Tháng bảy nước nhảy lên bờ', bão xô đổ bộ làm tốc mái nhà. Nộp 150 đồng tiền sửa chữa cho mỗi mảnh đất bạn đang sở hữu.",
+      "action": "custom"
+    },
+    {
+      "id": 27,
+      "type": "chance",
+      "title": "Chữa lợn lành thành lợn què",
+      "description": "Tự ý sửa sang đồ cổ trong nhà làm hỏng mất báu vật. Mất 300 đồng.",
+      "action": "pay",
+      "amount": 300
+    },
+    {
+      "id": 28,
+      "type": "chance",
+      "title": "Săn hoàng hôn Cực Tây",
+      "description": "Chuyến leo núi A Pa Chải thành công tốt đẹp, bạn bán lại bộ ảnh độc quyền cho tạp chí du lịch. Nhận 350 đồng.",
+      "action": "money",
+      "amount": 350
+    },
+    {
+      "id": 29,
+      "type": "chance",
+      "title": "Bốc được biển số gánh",
+      "description": "Chiếc xe máy cũ của bạn bấm được biển số ngũ quý siêu đẹp, đại gia hỏi mua lại ngay lập tức. Nhận 800 đồng.",
+      "action": "money",
+      "amount": 800
+    },
+    {
+      "id": 30,
+      "type": "chance",
+      "title": "Trễ chuyến bay",
+      "description": "Bạn bị tắc đường tại cửa ngõ sân bay, phải hủy vé và mua lại vé giờ chót. Mất 400 đồng.",
+      "action": "pay",
+      "amount": 400
+    },
+    {
+      "id": 31,
+      "type": "chance",
+      "title": "Quý nhân phù trợ",
+      "description": "Đi đường nhặt được ví tiền, trả lại cho người mất và được hậu tạ. Nhận 100 đồng.",
+      "action": "money",
+      "amount": 100
+    },
+    {
+      "id": 32,
+      "type": "chance",
+      "title": "Đám hiếu trong làng",
+      "description": "Nghĩa tử là nghĩa tận, đi phúng viếng nhà chòm xóm. Nộp 50 đồng.",
+      "action": "pay",
+      "amount": 50
+    },
+    {
+      "id": 33,
+      "type": "chance",
+      "title": "Đất dính quy hoạch",
+      "description": "Dự án đường cao tốc chạy qua mảnh đất của bạn. Đóng băng mọi mảnh đất, không được thu tiền thuê ở lượt tiếp theo.",
+      "action": "custom"
+    },
+    {
+      "id": 34,
+      "type": "chance",
+      "title": "Kinh doanh mùa du lịch",
+      "description": "Mở dịch vụ xe đưa đón khách từ Sân bay Cam Ranh đến bãi biển Nha Trang. Nhận 100 đồng từ mỗi người chơi khác.",
+      "action": "custom"
+    },
+    {
+      "id": 35,
+      "type": "chance",
+      "title": "Gom hụi lớn",
+      "description": "Đến kỳ bạn được 'hốt' chót mẻ lưới phường lớn trong làng. Nhận 1000 đồng.",
+      "action": "money",
+      "amount": 1000
+    },
+    {
+      "id": 36,
+      "type": "chance",
+      "title": "Sương mù dày đặc",
+      "description": "Thời tiết xấu tại núi cao khiến đoàn du lịch của bạn mắc kẹt, phải thuê homestay giá cao đón bão. Nộp 300 đồng.",
+      "action": "pay",
+      "amount": 300
+    },
+    {
+      "id": 37,
+      "type": "chance",
+      "title": "Thị trường đóng băng",
+      "description": "Cơn sốt đất đi qua, bạn bị ốm vốn. Đóng băng khu đất gần nhất (không được thu tiền thuê) trong 3 lượt tiếp theo.",
+      "action": "custom"
+    },
+    {
+      "id": 38,
+      "type": "chance",
+      "title": "Thuế đất phi nông nghiệp",
+      "description": "Đến kỳ hạn hoàn thành nghĩa vụ ngân sách nhà nước đối với các bất động sản đang sở hữu. Nộp 100 đồng/mảnh đất.",
+      "action": "custom"
+    },
+    {
+      "id": 39,
+      "type": "chance",
+      "title": "Thách cưới nhà gái",
+      "description": "Con trai đòi lấy vợ làng bên, nhà gái thách cưới bộ trang sức vàng ta và 10 mâm lễ quả. Nộp 600 đồng.",
+      "action": "pay",
+      "amount": 600
+    },
+    {
+      "id": 40,
+      "type": "chance",
+      "title": "Thị trường đóng băng",
+      "description": "Cơn sốt đất đi qua, bạn bị ốm vốn. Đóng băng khu đất gần nhất (không được thu tiền thuê) trong 3 lượt tiếp theo.",
+      "action": "custom"
+    },
+    {
+      "id": 41,
+      "type": "chance",
+      "title": "Bị cách ly y tế",
+      "description": "Bạn có yếu tố dịch tễ nghi vấn khi vừa hạ cánh xuống sân bay. Đi thẳng đến ô VÀO TÙ (nhận lương nếu đi qua ô Khởi hành).",
+      "action": "go_to_jail"
+    },
+    {
+      "id": 42,
+      "type": "chance",
+      "title": "Nợ thần tài",
+      "description": "Nghe bảo lên sáp đỏ bỏ, bạn lập tức di chuyển ngược chiều. Lùi lại 5 ô tính từ vị trí hiện tại.",
+      "action": "move_relative",
+      "amount": -5
+    },
+    {
+      "id": 43,
+      "type": "chance",
+      "title": "Hạn Tam Tai",
+      "description": "Đi đứng không cẩn thận, làm vỡ bình gốm cổ quý hiếm của người chơi khác. Trả 500 đồng cho người chơi khác.",
+      "action": "pay",
+      "amount": 500
+    },
+    {
+      "id": 44,
+      "type": "chance",
+      "title": "Ăn chơi quá độ",
+      "description": "Đi bar, vũ trường thâu đêm suốt sáng tại Nha Trang, quẹt thẻ cháy túi. Mất 500 đồng.",
+      "action": "pay",
+      "amount": 500
+    },
+    {
+      "id": 45,
+      "type": "chance",
+      "title": "Hàng xóm lấn ranh đất",
+      "description": "Thuê đo đạc địa chính và luật sư giải quyết vụ tranh chấp cột mốc bờ ao. Nộp 300 đồng.",
+      "action": "pay",
+      "amount": 300
+    },
+    {
+      "id": 46,
+      "type": "chance",
+      "title": "Tổ chức lễ mừng thọ",
+      "description": "Làm 20 mâm cỗ mời cả làng đến mừng thọ cho ông bà nội tròn 80 tuổi. Nộp 500 đồng.",
+      "action": "pay",
+      "amount": 500
+    },
+    {
+      "id": 47,
+      "type": "chance",
+      "title": "Hành trình xuyên Việt",
+      "description": "Lên kế hoạch đi phượt xuyên Việt. Di chuyển thẳng đến điểm Cực Bắc, sau đó nhảy tiếp đến Cực Nam và kết thúc lượt.",
+      "action": "custom"
+    },
+    {
+      "id": 48,
+      "type": "chance",
+      "title": "Chuyến bay đêm bão táp",
+      "description": "Máy bay không thể hạ cánh do thời tiết xấu, phải bay vòng vòng. Mất lượt xúc xắc tiếp theo để chờ máy bay ổn định.",
+      "action": "custom"
+    },
+    {
+      "id": 49,
+      "type": "chance",
+      "title": "Vinh quy bái tổ",
+      "description": "Bạn đỗ thủ khoa kỳ thi. Cưỡi ngựa đi thẳng về ô KHỞI HÀNH (START) và nhận lương gấp đôi.",
+      "action": "move_to",
+      "targetName": "Hello Việt Nam (Khởi Hành)"
+    },
+    {
+      "id": 50,
+      "type": "chance",
+      "title": "Lạc vào chợ tình",
+      "description": "Di chuyển đến tỉnh TUYÊN QUANG; mải nghe tiếng khèn gọi bạn tình và uống rượu cần xử núi nên dừng chân trong 1 lượt.",
+      "action": "move_to",
+      "targetName": "Tuyên Quang"
+    },
+    {
+      "id": 51,
+      "type": "chance",
+      "title": "Trốn vé tham quan",
+      "description": "Leo rào vào khu di tích mà không mua vé, bị bảo vệ bắt quả tang. Đi thẳng VÀO TÙ không qua ô KHỞI HÀNH.",
+      "action": "go_to_jail"
+    },
+    {
+      "id": 52,
+      "type": "chance",
+      "title": "Cưới vợ Tây Nguyên",
+      "description": "Trải nghiệm cảm giác phiêu lưu đại ngàn tại buôn làng. Di chuyển thẳng đến tỉnh ĐẮK LẮK.",
+      "action": "move_to",
+      "targetName": "Đắk Lắk"
+    },
+    {
+      "id": 53,
+      "type": "chance",
+      "title": "Thanh lý xe cổ",
+      "description": "Bạn bán được chiếc xe máy cũ gắn bó từ thời sinh viên với giá 'kỷ niệm' cho một người em khóa dưới. Nhận 200 đồng.",
+      "action": "money",
+      "amount": 200
+    },
+    {
+      "id": 54,
+      "type": "chance",
+      "title": "Nhà đất có sổ đỏ nhanh",
+      "description": "Nhờ chính sách số hóa thủ tục hành chính, bạn được cấp nhà miễn phí cho mảnh đất rẻ nhất đang sở hữu.",
+      "action": "custom"
+    },
+    {
+      "id": 55,
+      "type": "chance",
+      "title": "Về nguồn",
+      "description": "'Dù ai đi ngược về xuôi/Nhớ ngày giỗ Tổ mùng mười tháng ba'. Di chuyển đến tỉnh PHÚ THỌ để dâng hương kính Tổ tiên.",
+      "action": "move_to",
+      "targetName": "Phú Thọ"
+    },
+    {
+      "id": 56,
+      "type": "chance",
+      "title": "Xuôi dòng sông Hương",
+      "description": "Bạn muốn tìm một khoảng lặng để nghe ca Huế trên sông nước thẳm nghiêm. Di chuyển thẳng đến tỉnh HUẾ.",
+      "action": "move_to",
+      "targetName": "Huế"
+    },
+    {
+      "id": 57,
+      "type": "chance",
+      "title": "Ngoại giao thương mại",
+      "description": "Bạn tháp tùng phái đoàn Chính phủ sang thăm nước khác. Di chuyển thẳng đến sân bay gần nhất.",
+      "action": "custom"
+    },
+    {
+      "id": 58,
+      "type": "chance",
+      "title": "Kỳ nghỉ lãng mạn",
+      "description": "Bạn đưa gia đình đi trốn cái nóng oi ả tại thành phố ngàn hoa. Di chuyển thẳng đến tỉnh LÂM ĐỒNG.",
+      "action": "move_to",
+      "targetName": "Lâm Đồng"
+    },
+    {
+      "id": 59,
+      "type": "chance",
+      "title": "Nhận tiền hỗ trợ thiên tai",
+      "description": "Do chịu ảnh hưởng nhẹ từ đợt bão năm ngoái, bạn được nhà nước giải ngân gói cứu trợ khôi phục sản xuất. Nhận 400 đồng.",
+      "action": "money",
+      "amount": 400
+    },
+    {
+      "id": 60,
+      "type": "chance",
+      "title": "Trúng thầu phường sớm",
+      "description": "Bạn là người may mắn được bốc phường đầu tiên để lấy vốn làm ăn mà không phải trả lãi cao. Nhận 500 đồng.",
+      "action": "money",
+      "amount": 500
+    },
+    {
+      "id": 61,
+      "type": "chance",
+      "title": "Nộp phạt ẩu đả",
+      "description": "Bạn dừng ô tô ăn bún chả ở Hà Nội sai quy định và bị xe cẩu kéo đi. Nộp 400 đồng tiền phạt và chi phí lưu kho.",
+      "action": "pay",
+      "amount": 400
+    },
+    {
+      "id": 62,
+      "type": "chance",
+      "title": "Hỏng điện thoại đời mới",
+      "description": "Bạn làm rơi chiếc smartphone xuống biển khi đang chụp ảnh check-in tại bãi biển. Mất 500 đồng tiền mua máy mới.",
+      "action": "pay",
+      "amount": 500
+    },
+    {
+      "id": 63,
+      "type": "chance",
+      "title": "Chén làng",
+      "description": "Đến ô sân bay gần nhất. Nếu có người ở đó, trả người ta 200 đồng để được mua vé trước.",
+      "action": "custom"
+    },
+    {
+      "id": 64,
+      "type": "chance",
+      "title": "Quà Tết quê nhà",
+      "description": "Con cháu phương xa gửi giỏ quà Tết kèm bao lì xì đỏ may mắn. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 65,
+      "type": "chance",
+      "title": "Tăng ca làm giờ",
+      "description": "Thức đêm hoàn thành dự án cho kịp tiến độ, sếp thưởng nóng liền tay. Nhận 150 đồng.",
+      "action": "money",
+      "amount": 150
+    },
+    {
+      "id": 66,
+      "type": "chance",
+      "title": "Bắt xe cấp cứu",
+      "description": "Bị đau bụng dữ dội vào vào viện. Di chuyển thẳng đến ô VÀO TÙ (nhận 300 đồng chi phí dưỡng bệnh).",
+      "action": "go_to_jail"
+    },
+    {
+      "id": 67,
+      "type": "chance",
+      "title": "Bảo dưỡng nhà cổ",
+      "description": "Ngôi nhà ba gian của bạn ở quê bị dột sau trận mưa rào đầu hạ. Nộp 150 đồng cho mỗi mảnh đất màu vàng bạn đang sở hữu.",
+      "action": "custom"
+    },
+    {
+      "id": 68,
+      "type": "chance",
+      "title": "Hợp đồng kỳ nghỉ",
+      "description": "Bạn nghe dạ cả tin chuyển khoản chi phí 'hợp đồng kỳ nghỉ' cho kẻ gian qua mạng. Mất 500 đồng.",
+      "action": "pay",
+      "amount": 500
+    },
+    {
+      "id": 69,
+      "type": "chance",
+      "title": "Tiền gửi nhà nước",
+      "description": "Ngân hàng trả lãi sổ tiết kiệm theo tháng. Lãnh 100 đồng.",
+      "action": "money",
+      "amount": 100
+    },
+    {
+      "id": 70,
+      "type": "chance",
+      "title": "Nhận sổ lương hưu",
+      "description": "Đến kỳ lĩnh lương hưu trí hàng tháng, thong thả dưỡng già. Nhận 200 đồng.",
+      "action": "money",
+      "amount": 200
+    },
+    {
+      "id": 71,
+      "type": "chance",
+      "title": "Quá giang",
+      "description": "Lái xe đưa đón phái đoàn đối tác đi khảo sát thực địa khu đất vàng. Tiến lên 5 bước tính từ vị trí hiện tại.",
+      "action": "move_relative",
+      "amount": 5
+    },
+    {
+      "id": 72,
+      "type": "chance",
+      "title": "Quên mang ví tiền",
+      "description": "Ra đến chợ mới ngớ người phát hiện quên ví ở nhà. Quay về ô KHỞI HÀNH (START) nhưng không được nhận lương.",
+      "action": "move_to",
+      "targetName": "Hello Việt Nam (Khởi Hành)"
+    }
+  ],
+  "chest": [
+    {
+      "id": 1,
+      "type": "chest",
+      "title": "Được mùa lúa chín",
+      "description": "Trúng đậm vụ chiêm xuân, thóc lúa đầy kho. Nhận 200 đồng.",
+      "action": "money",
+      "amount": 200
+    },
+    {
+      "id": 2,
+      "type": "chest",
+      "title": "Trúng vụ nuôi tôm",
+      "description": "Trúng vụ tôm thẻ chân trắng ở miền Tây. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 3,
+      "type": "chest",
+      "title": "Cơm hàng cháo chợ",
+      "description": "Ăn uống không cẩn thận bị đau bụng, phải nhập viện y tế làng. Nộp 100 đồng.",
+      "action": "pay",
+      "amount": 100
+    },
+    {
+      "id": 4,
+      "type": "chest",
+      "title": "Đi chúc Tết muộn",
+      "description": "Quá chén với bạn bè, bị phạt tiền vì vi phạm luật giao thông giao thông. Nộp 150 đồng.",
+      "action": "pay",
+      "amount": 150
+    },
+    {
+      "id": 5,
+      "type": "chest",
+      "title": "Lính bắt phu",
+      "description": "Bạn bị điều đi xây thành đắp lũy. Đi thẳng đến ô VÀO TÙ (Không đi qua ô Khởi hành)",
+      "action": "go_to_jail"
+    },
+    {
+      "id": 6,
+      "type": "chest",
+      "title": "Canh gác biên giới",
+      "description": "Nhận lệnh canh gác biên giới phía Bắc. Di chuyển thẳng đến ô LẠNG SƠN.",
+      "action": "move_to",
+      "targetName": "Lạng Sơn"
+    },
+    {
+      "id": 7,
+      "type": "chest",
+      "title": "Họ hàng mừng cưới",
+      "description": "Con cháu trong nhà dựng vợ gả chồng, nhận tiền mừng hỉ. Nhận 150 đồng.",
+      "action": "money",
+      "amount": 150
+    },
+    {
+      "id": 8,
+      "type": "chest",
+      "title": "Có thờ có thiêng",
+      "description": "Đầu năm đi lễ chùa, cầu tài cầu lộc, bỏ tiền sắm đồ lễ. Trừ 150 đồng.",
+      "action": "pay",
+      "amount": 150
+    },
+    {
+      "id": 9,
+      "type": "chest",
+      "title": "Lụt lội miền sông nước",
+      "description": "Triều cường dâng cao ở miền Tây, cá tôm thoát ra ngoài hết. Mất 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 10,
+      "type": "chest",
+      "title": "Mất mùa đại hạn",
+      "description": "Gặp nạn hạn hán, đồng ruộng nứt nẻ. Nhận 100 đồng tiền cứu trợ gia đình.",
+      "action": "money",
+      "amount": 100
+    },
+    {
+      "id": 11,
+      "type": "chest",
+      "title": "Vinh quy bái tổ",
+      "description": "Thi đỗ Trạng nguyên, cưỡi ngựa vinh quy về làng. Di chuyển thẳng đến ô KHỞI HÀNH (START) và nhận gấp đôi tiền lương.",
+      "action": "move_to",
+      "targetName": "Hello Việt Nam (Khởi Hành)"
+    },
+    {
+      "id": 12,
+      "type": "chest",
+      "title": "Chuyến tàu Thống Nhất",
+      "description": "Bạn trúng thầu gian hàng bán quà lưu niệm. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 13,
+      "type": "chest",
+      "title": "Trúng thầu đất vàng",
+      "description": "Bạn được quyền mua lại một bất động sản chưa có chủ với giá giảm 10% hoặc di chuyển thẳng đến ô HÀ NỘI.",
+      "action": "custom"
+    },
+    {
+      "id": 14,
+      "type": "chest",
+      "title": "Mở rộng bờ cõi",
+      "description": "Được làng chia thêm đất phần trăm do có công quyên góp xây đình. Nhận 1 thẻ miễn phí tiền thuê đất trong 1 lượt.",
+      "action": "custom"
+    },
+    {
+      "id": 15,
+      "type": "chest",
+      "title": "Nộp sưu thuế",
+      "description": "Đến kỳ nộp thuế đất. Nộp 50 đồng cho mỗi mảnh đất bạn đang sở hữu.",
+      "action": "custom"
+    },
+    {
+      "id": 16,
+      "type": "chest",
+      "title": "Lạc vào chợ tình Sa Pa",
+      "description": "Mải mê xem múa khèn, thổi lá mà quên mất lối về. Mất lượt xúc xắc tiếp theo.",
+      "action": "custom"
+    },
+    {
+      "id": 17,
+      "type": "chest",
+      "title": "Được tuổi cất nhà",
+      "description": "Thấy phần năm nay cát tường, bạn được phép xây ngay 1 ngôi nhà trên đất của mình với giá giảm 50%.",
+      "action": "custom"
+    },
+    {
+      "id": 18,
+      "type": "chest",
+      "title": "Lễ tạ cuối năm",
+      "description": "Đi lễ tạ Cửa Ông, thần tài gõ cửa, công việc hanh thông. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 19,
+      "type": "chest",
+      "title": "Bản khoán cho thôn",
+      "description": "Lên chùa làm lễ cầu bình an cho gia đình. Nộp 100 đồng.",
+      "action": "pay",
+      "amount": 100
+    },
+    {
+      "id": 20,
+      "type": "chest",
+      "title": "Hội làng mở thưởng",
+      "description": "Thắng cuộc thi đấu vật đầu xuân. Nhận 100 đồng.",
+      "action": "money",
+      "amount": 100
+    },
+    {
+      "id": 21,
+      "type": "chest",
+      "title": "Sắm sửa lễ lạt",
+      "description": "Mua đồ lễ hỏi, trầu cau, tráp quả đi hỏi vợ cho con trai. Nộp 250 đồng.",
+      "action": "pay",
+      "amount": 250
+    },
+    {
+      "id": 22,
+      "type": "chest",
+      "title": "Check-in Cột cờ Lũng Cú",
+      "description": "Chinh phục Cực Bắc Tổ quốc, lan tỏa năng lượng tích cực trên mạng xã hội, được tài trợ du lịch. Nhận 400 đồng.",
+      "action": "money",
+      "amount": 400
+    },
+    {
+      "id": 23,
+      "type": "chest",
+      "title": "Thông thương đặc sản",
+      "description": "Gian hàng mì Quảng của bạn tại Sân bay Đà Nẵng khách xếp hàng đông nghịt. Nhận 600 đồng.",
+      "action": "money",
+      "amount": 600
+    },
+    {
+      "id": 24,
+      "type": "chest",
+      "title": "Nhận tiền đền bù đất",
+      "description": "Một phần đất ruộng của bạn được thu hồi để mở rộng đường cao tốc. Nhận 500 đồng.",
+      "action": "money",
+      "amount": 500
+    },
+    {
+      "id": 25,
+      "type": "chest",
+      "title": "Kinh doanh trà đá vỉa hè",
+      "description": "Mở quán nước đầu làng, khách ra vào nườm nượp. Nhận 50 đồng từ mỗi người chơi khác.",
+      "action": "custom"
+    },
+    {
+      "id": 26,
+      "type": "chest",
+      "title": "Lên xe hoa",
+      "description": "Bạn cưới vợ/gả chồng. Mỗi người chơi khác mừng cưới bạn 50 đồng.",
+      "action": "custom"
+    },
+    {
+      "id": 27,
+      "type": "chest",
+      "title": "Sập giàn thiên lý",
+      "description": "Nhà cửa lâu ngày không trùng tu bị hỏng hóc. Nộp 100 đồng.",
+      "action": "pay",
+      "amount": 100
+    },
+    {
+      "id": 28,
+      "type": "chest",
+      "title": "Đón bình minh sớm nhất",
+      "description": "Bạn là người đầu tiên đón ánh nắng ngày mới tại Mũi Điện (Cực Đông). Tinh thần sảng khoái, làm ăn hanh thông. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 29,
+      "type": "chest",
+      "title": "Gặp lại người thân",
+      "description": "Họ hàng từ nước ngoài bay về ăn Tết. Đến ô sân bay gần nhất để đón họ.",
+      "action": "custom"
+    },
+    {
+      "id": 30,
+      "type": "chest",
+      "title": "KOL ẩm thực vùng miền",
+      "description": "Video review món lẩu mắm miền Tây của bạn lên xu hướng toàn cầu. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 31,
+      "type": "chest",
+      "title": "Lễ hội Đền Hùng",
+      "description": "Bạn trúng thầu gian hàng bán đặc sản dịp giỗ Tổ. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 32,
+      "type": "chest",
+      "title": "Hàng xóm hấn tụng",
+      "description": "Tranh chấp ranh giới bờ rào 'đầu móng tới xanh rờn', nộp án phí. Nộp 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 33,
+      "type": "chest",
+      "title": "Chia gia tài",
+      "description": "Chia lộc lá cho con cái đi làm ăn xa. Nộp 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 34,
+      "type": "chest",
+      "title": "Gặp may ở Nội Bài",
+      "description": "Được hãng hàng không nâng hạng lên ghế Thương gia miễn phí vì là hành khách thứ 10 triệu. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 35,
+      "type": "chest",
+      "title": "Đào được đồ cổ dưới ruộng",
+      "description": "Khi cày ruộng, bạn cuốc được chiếc rìu đá bọc đồng cổ thời Đông Sơn. Nhận 450 đồng.",
+      "action": "money",
+      "amount": 450
+    },
+    {
+      "id": 36,
+      "type": "chest",
+      "title": "Mua hành lý quá cước",
+      "description": "Đi du lịch mang quá nhiều đặc sản giò chả, nước mắm, bị giữ lại tại sân bay, phạt tiền ký gửi. Nộp 250 đồng.",
+      "action": "pay",
+      "amount": 250
+    },
+    {
+      "id": 37,
+      "type": "chest",
+      "title": "Tìm lại quỹ đen",
+      "description": "Bạn vô tình tìm thấy cọc tiền polyme kẹp trong cuốn sách cũ phủ bụi từ 5 năm trước. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 38,
+      "type": "chest",
+      "title": "Đi nhầm làn đường cao tốc",
+      "description": "Bạn bị thổi phạt vì lái xe máy chạy thẳng vào làn đường dành riêng cho ô tô trên tuyến cao tốc Bắc - Nam. Nộp 250 đồng.",
+      "action": "pay",
+      "amount": 250
+    },
+    {
+      "id": 39,
+      "type": "chest",
+      "title": "Hết hạn đăng kiểm xe",
+      "description": "Xe tải chở hàng của bạn quá hạn kiểm định, bị giữ xe 7 ngày và phạt hành chính. Nộp 400 đồng và mất lượt xúc xắc tiếp theo.",
+      "action": "custom"
+    },
+    {
+      "id": 40,
+      "type": "chest",
+      "title": "Gặp lại cố nhân",
+      "description": "Bạn cũ lâu năm họp mặt, bao trọn tiệc lại còn biếu quà mang về. Nhận 250 đồng.",
+      "action": "money",
+      "amount": 250
+    },
+    {
+      "id": 41,
+      "type": "chest",
+      "title": "Khai trương hồng phát",
+      "description": "Khai trương cửa hàng mới, khách khứa ra vào nườm nượp, tiền vào như nước. Nhận 400 đồng.",
+      "action": "money",
+      "amount": 400
+    },
+    {
+      "id": 42,
+      "type": "chest",
+      "title": "Né chốt giao thông",
+      "description": "Thấy bóng dáng lực lượng chức năng phía trước, vội rẽ vào ngõ nhỏ. Di chuyển đến ô CƠ HỘI / KHÍ VẬN gần nhất phía sau lưng.",
+      "action": "custom"
+    },
+    {
+      "id": 43,
+      "type": "chest",
+      "title": "Cưới xin đền đáp",
+      "description": "Tháng đẹp, bạn nhận liên tiếp 3 tấm thiệp mời cưới trong cùng một tuần. Nộp 450 đồng.",
+      "action": "pay",
+      "amount": 450
+    },
+    {
+      "id": 44,
+      "type": "chest",
+      "title": "Đóng phí bảo trì chung cư",
+      "description": "Ban quản lý tòa nhà gửi giấy báo thu phí dịch vụ và vận hành thang máy định kỳ. Nộp 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 45,
+      "type": "chest",
+      "title": "Thăng quan tiến chức",
+      "description": "Được bầu làm tổ trưởng tổ dân phố. Mua bánh kẹo cảm ơn người dân đã tin tưởng. Trừ 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 46,
+      "type": "chest",
+      "title": "Lãnh tiền thừa kế",
+      "description": "Nhận phần tài sản, đất đai tổ tiên để lại theo đúng di chúc dòng họ. Nhận 600 đồng.",
+      "action": "money",
+      "amount": 600
+    },
+    {
+      "id": 47,
+      "type": "chest",
+      "title": "Cho con đi học",
+      "description": "Đầu năm học mới, đóng đủ thứ tiền từ học phí, đồng phục đến quỹ phụ huynh. Mất 350 đồng.",
+      "action": "pay",
+      "amount": 350
+    },
+    {
+      "id": 48,
+      "type": "chest",
+      "title": "Mưa về giờ chót",
+      "description": "Có việc đột xuất ở quê, phải mua vé bay gấp với giá cao. Di chuyển thẳng đến SÂN BAY gần nhất và mất thêm 100 đồng lệ phí đổi vé.",
+      "action": "custom"
+    },
+    {
+      "id": 49,
+      "type": "chest",
+      "title": "Ký sự bàn chân",
+      "description": "Bạn tham gia đoàn làm phim phóng sự tại biên giới phía Tây. Di chuyển thẳng đến Cực Tây.",
+      "action": "move_to",
+      "targetName": "Cực Tây"
+    },
+    {
+      "id": 50,
+      "type": "chest",
+      "title": "Vào Nam lập nghiệp",
+      "description": "Cầm trong tay tấm bằng tốt nghiệp, quyết định vào Nam tìm cơ hội. Di chuyển thẳng đến TP. HỒ CHÍ MINH.",
+      "action": "move_to",
+      "targetName": "TP. Hồ Chí Minh"
+    },
+    {
+      "id": 51,
+      "type": "chest",
+      "title": "Bắt cua Cà Mau",
+      "description": "Nghe danh cua gạch Năm Căn ngon nhất nước, bạn làm một chuyến ẩm thực miền Tây. Di chuyển thẳng đến tỉnh CÀ MAU.",
+      "action": "move_to",
+      "targetName": "Cà Mau"
+    },
+    {
+      "id": 52,
+      "type": "chest",
+      "title": "Hành hương đất Phật",
+      "description": "Bạn muốn tìm sự thanh tịnh nơi tâm hồn tại non thiêng Yên Tử. Di chuyển thẳng đến tỉnh QUẢNG NINH.",
+      "action": "move_to",
+      "targetName": "Quảng Ninh"
+    },
+    {
+      "id": 53,
+      "type": "chest",
+      "title": "Hưởng lộc con cháu",
+      "description": "Con cái đi làm ăn xa gửi tặng bố mẹ một chuyến du lịch nghỉ dưỡng. Nhận 300 đồng.",
+      "action": "money",
+      "amount": 300
+    },
+    {
+      "id": 54,
+      "type": "chest",
+      "title": "Được tặng sim số đẹp",
+      "description": "Bạn bốc thăm trúng thưởng một chiếc sim điện thoại đuôi tứ quý. Có người gạ mua lại ngay. Nhận 600 đồng.",
+      "action": "money",
+      "amount": 600
+    },
+    {
+      "id": 55,
+      "type": "chest",
+      "title": "Săn mây Tây Bắc",
+      "description": "Di chuyển thẳng đến tỉnh LÀO CAI để ngắm hoa ban nở. Nếu đi qua ô Khởi hành, nhận lương như thường lệ.",
+      "action": "move_to",
+      "targetName": "Lào Cai"
+    },
+    {
+      "id": 56,
+      "type": "chest",
+      "title": "Thấy hội Điện Biên",
+      "description": "Kỷ niệm ngày chiến thắng lịch sử lừng lẫy năm châu, đến thăm chiến trường xưa. Di chuyển thẳng đến tỉnh ĐIỆN BIÊN.",
+      "action": "move_to",
+      "targetName": "Điện Biên"
+    },
+    {
+      "id": 57,
+      "type": "chest",
+      "title": "Đi tìm người yêu cũ",
+      "description": "Nghe tin người xưa đi lấy chồng, bạn bắt chuyến bay khẩn cấp về quê lúa. Di chuyển thẳng đến tỉnh HƯNG YÊN.",
+      "action": "move_to",
+      "targetName": "Hưng Yên"
+    },
+    {
+      "id": 58,
+      "type": "chest",
+      "title": "Lệnh triệu tập khẩn",
+      "description": "Lên gặp cơ quan chức năng để làm rõ vụ tranh chấp đất đai ở xã. Di chuyển ngược về ô gần nhất có chữ KHÍ VẬN để bốc thẻ.",
+      "action": "custom"
+    },
+    {
+      "id": 59,
+      "type": "chest",
+      "title": "Đại gia chân đất",
+      "description": "Đất quê ở Hải Phòng tăng giá. Nếu đã sở hữu mảnh đất này, được phép bán lại cho Ngân hàng với giá gấp 2,5 lần giá gốc.",
+      "action": "custom"
+    },
+    {
+      "id": 60,
+      "type": "chest",
+      "title": "Cố lỗi đổi đời",
+      "description": "Bạn và người chơi khác đổi mảnh đất đắt nhất đang sở hữu cho nhau.",
+      "action": "custom"
+    },
+    {
+      "id": 61,
+      "type": "chest",
+      "title": "Trùng tu từ đường",
+      "description": "Họ tộc họp mặt, quyết định đóng góp tiền đúc lại lư hương bằng đồng và sơn son thếp vàng nhà thờ tổ. Nộp 400 đồng.",
+      "action": "pay",
+      "amount": 400
+    },
+    {
+      "id": 62,
+      "type": "chest",
+      "title": "Đám cưới nhà sếp",
+      "description": "Nhận tấm thiệp hồng từ con sếp lớn, tiền mừng không thể đi ít. Nộp 300 đồng.",
+      "action": "pay",
+      "amount": 300
+    },
+    {
+      "id": 63,
+      "type": "chest",
+      "title": "Phạt nguội giao thông",
+      "description": "Bị camera an ninh ghi lại hình ảnh vượt đèn đỏ khi đang vội ra sân bay. Nộp 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 64,
+      "type": "chest",
+      "title": "Thị trường đóng băng",
+      "description": "Đóng băng mọi khu đất (không được thu tiền thuê) trong 1 lượt tiếp theo.",
+      "action": "custom"
+    },
+    {
+      "id": 65,
+      "type": "chest",
+      "title": "Hộ chiếu ngoại giao",
+      "description": "Bạn là cán bộ cấp cao được ưu tiên thông quan nhanh. Nhận 1 thẻ THOÁT TÙ MIỄN PHÍ.",
+      "action": "out_of_jail"
+    },
+    {
+      "id": 66,
+      "type": "chest",
+      "title": "Du lịch tâm linh",
+      "description": "Bạn bay vào Đà Nẵng để đi lễ Hội An. Di chuyển thẳng đến Sân bay Đà Nẵng.",
+      "action": "move_to",
+      "targetName": "Sân bay Đà Nẵng"
+    },
+    {
+      "id": 67,
+      "type": "chest",
+      "title": "Lũ quét",
+      "description": "Mưa lớn sạt lở hoành hành, nhà cửa của bạn cần gia cố khẩn cấp. Nộp 200 đồng cho mỗi mảnh đất bạn đang sở hữu.",
+      "action": "custom"
+    },
+    {
+      "id": 68,
+      "type": "chest",
+      "title": "Hụt hơi vì đu đỉnh",
+      "description": "Nghe lời môi giới ôm nhầm 'đất ma' chưa có sổ đỏ ở vùng sâu vùng xa. Nộp 400 đồng.",
+      "action": "pay",
+      "amount": 400
+    },
+    {
+      "id": 69,
+      "type": "chest",
+      "title": "Đau ruột thừa cấp tính",
+      "description": "Bị đau ruột thừa, phải mổ cấp cứu tại bệnh viện quốc tế. Nộp 450 đồng.",
+      "action": "pay",
+      "amount": 450
+    },
+    {
+      "id": 70,
+      "type": "chest",
+      "title": "Mua bảo hiểm xe cơ giới",
+      "description": "Đến hạn bắt buộc phải đóng bảo hiểm và bảo dưỡng định kỳ cho toàn bộ xe cộ trong nhà. Nộp 200 đồng.",
+      "action": "pay",
+      "amount": 200
+    },
+    {
+      "id": 71,
+      "type": "chest",
+      "title": "Chuyến bay thẳng",
+      "description": "Tới Thủ đô giải quyết công việc. Di chuyển thẳng đến Sân bay Nội Bài. Nếu chưa có ai mua, bạn có thể mua lại từ Ngân hàng.",
+      "action": "move_to",
+      "targetName": "Sân bay Nội Bài"
+    },
+    {
+      "id": 72,
+      "type": "chest",
+      "title": "Tàu biển hoán đổi",
+      "description": "Trúng vé du thuyền 5 sao đi dọc bờ biển miền Trung. Di chuyển đến Điểm Cực gần nhất với vị trí của bạn.",
+      "action": "custom"
+    }
+  ]
+}

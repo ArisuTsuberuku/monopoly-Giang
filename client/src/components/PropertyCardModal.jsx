@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { Check, X, ShieldAlert } from 'lucide-react';
 
 /**
- * Hàm lấy mã màu header cho thẻ đất dựa vào thuộc tính group
+ * Hàm lấy mã màu header cho thẻ đất dựa vào thuộc tính group (phục vụ Fallback UI)
  */
 function getHeaderColor(group, type) {
   if (type === 'airport') return '#06b6d4';
@@ -24,8 +24,8 @@ function getHeaderColor(group, type) {
 }
 
 /**
- * Component Thẻ Đất 2D Overlay thuần túy (Pure 2D Overlay Modal)
- * Nằm ngoài không gian 3D Canvas, hiển thị rõ nét, không bị ngược chữ hoặc ảnh hưởng bởi camera R3F.
+ * Component Thẻ Đất Pure Image Overlay (Floating Card chuẩn 16:9)
+ * Lột bỏ toàn bộ nền trắng, khung viền hay text thừa. Tôn vinh tuyệt đối bức ảnh 16:9 và nút bấm trôi nổi.
  */
 export default function PropertyCardModal() {
   const modalData = useGameStore((state) => state.activePropertyModal);
@@ -36,6 +36,13 @@ export default function PropertyCardModal() {
   const buyProperty = useGameStore((state) => state.buyProperty);
   const upgradeProperty = useGameStore((state) => state.upgradeProperty);
   const closePropertyModal = useGameStore((state) => state.closePropertyModal);
+
+  const [imgError, setImgError] = useState(false);
+
+  // Khi mở thẻ đất mới (modalData.tileId thay đổi), reset trạng thái lỗi ảnh
+  useEffect(() => {
+    setImgError(false);
+  }, [modalData?.tileId]);
 
   // Chỉ hiển thị khi có dữ liệu modal hợp lệ từ Authoritative Server
   if (!modalData || typeof modalData.tileId !== 'number') {
@@ -59,165 +66,210 @@ export default function PropertyCardModal() {
   // Tìm thông tin chủ sở hữu nếu có
   const tileState = properties[modalData.tileId] || {};
   const owner = players.find((p) => p.id === tileState.ownerId);
-  const ownerName = owner ? owner.name : 'Chủ sở hữu khác';
+  const ownerName = owner ? owner.name : 'Chưa có chủ';
 
   // Kiểm tra chi phí nâng cấp nếu ở mode self_owned
   const currentLevel = modalData.level || 0;
   const nextUpgrade = tile.upgrades && tile.upgrades[currentLevel];
   const canAffordUpgrade = nextUpgrade ? currentMoney >= nextUpgrade.cost : false;
 
+  const normalizedFileName = (tile.name || '').normalize('NFC');
+  const imageUrl = encodeURI(`/cards/${normalizedFileName}.webp`);
+
   return (
     <div
-      className="property-card-2d-overlay"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm"
       style={{
         position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
-        backdropFilter: 'blur(6px)',
+        inset: 0,
         zIndex: 50,
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.65)',
+        backdropFilter: 'blur(8px)',
         padding: '1.5rem',
         animation: 'fadeIn 0.25s ease-out'
       }}
     >
       <div
-        className="property-card-modal-content"
+        className="relative flex flex-col items-center max-w-4xl w-[90%] md:w-[70%]"
         style={{
-          background: '#ffffff',
-          border: '3px solid #cbd5e1',
-          borderRadius: '20px',
-          width: '100%',
-          maxWidth: '400px',
-          overflow: 'hidden',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0,0,0,0.08)',
+          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
-          fontFamily: 'Inter, sans-serif',
-          animation: 'bouncePopup 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
+          alignItems: 'center',
+          width: '90%',
+          maxWidth: '850px',
+          animation: 'bouncePopup 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)'
         }}
       >
-        {/* Header màu đặc trưng của nhóm đất */}
-        <div
-          className="deed-header"
-          style={{
-            background: headerColor,
-            padding: '1.25rem 1.5rem',
-            textAlign: 'center',
-            color: '#ffffff',
-            borderBottom: '4px solid rgba(0,0,0,0.15)'
-          }}
-        >
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', opacity: 0.95 }}>
-            {mode === 'self_owned' ? 'LANDMARK SỞ HỮU' : mode === 'rent_paid' ? 'THÔNG BÁO THUẾ / THUÊ' : 'GIẤY CHỨNG NHẬN QUYỀN SỞ HỮU'}
+        {/* Tên chủ sở hữu hoặc trạng thái nổi phía trên mép ảnh */}
+        {tileState.ownerId ? (
+          <div
+            className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 text-xs md:text-sm font-bold uppercase tracking-wider rounded-t-lg border-x border-t border-white/50 shadow-[0_-4px_10px_rgba(0,0,0,0.3)] z-10 opacity-95"
+            style={{
+              position: 'absolute',
+              top: '-16px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+              color: '#ffffff',
+              padding: '0.25rem 1.25rem',
+              borderRadius: '0.5rem 0.5rem 0 0',
+              fontWeight: 700,
+              fontSize: '0.8rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              boxShadow: '0 -4px 10px rgba(0,0,0,0.35)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.6)',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.6)',
+              borderRight: '1px solid rgba(255, 255, 255, 0.6)',
+              zIndex: 10,
+              opacity: 0.95
+            }}
+          >
+            👤 {ownerName}
           </div>
-          <h2 style={{ fontSize: '1.55rem', fontWeight: 800, margin: '0.25rem 0', fontFamily: 'Outfit, sans-serif', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
-            {tile.name}
-          </h2>
-          <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>
-            Chỉ số ô: #{tile.id} ({tile.type.toUpperCase()})
+        ) : mode === 'self_owned' ? (
+          <div
+            className="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-1 text-xs md:text-sm font-bold uppercase tracking-wider rounded-t-lg border-x border-t border-white/50 shadow-[0_-4px_10px_rgba(0,0,0,0.3)] z-10 opacity-95"
+            style={{
+              position: 'absolute',
+              top: '-16px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: 'linear-gradient(135deg, #16a34a, #15803d)',
+              color: '#ffffff',
+              padding: '0.25rem 1.25rem',
+              borderRadius: '0.5rem 0.5rem 0 0',
+              fontWeight: 700,
+              fontSize: '0.8rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              boxShadow: '0 -4px 10px rgba(0,0,0,0.35)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.6)',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.6)',
+              borderRight: '1px solid rgba(255, 255, 255, 0.6)',
+              zIndex: 10,
+              opacity: 0.95
+            }}
+          >
+            ⭐ Landmark sở hữu của bạn
           </div>
-        </div>
+        ) : null}
 
-        {/* Thân thẻ đất với ảnh Khế ước thực từ /board card/ */}
-        <div className="deed-body" style={{ padding: '1.4rem', display: 'flex', flexDirection: 'column', gap: '0.95rem', color: '#1e293b' }}>
-          {/* Ảnh Khế ước thật tải từ folder /board card/ */}
-          <img
-            src={`/board card/${tile.name}.png`}
-            alt={tile.name}
-            onError={(e) => { e.target.style.display = 'none'; }}
+        {/* Bức ảnh 16:9 nguyên bản không khung viền */}
+        <img
+          src={imageUrl}
+          alt={tile.name}
+          onError={() => setImgError(true)}
+          className="w-full aspect-[16/9] object-contain drop-shadow-2xl rounded-xl"
+          style={{
+            width: '100%',
+            aspectRatio: '16 / 9',
+            objectFit: 'contain',
+            borderRadius: '16px',
+            filter: 'drop-shadow(0 25px 35px rgba(0, 0, 0, 0.8))',
+            display: imgError ? 'none' : 'block'
+          }}
+        />
+
+        {/* Khi ảnh bị lỗi (chưa có thẻ đất), hiển thị khối Fallback UI bo tròn và đổ bóng cho đẹp */}
+        {imgError && (
+          <div
+            className="deed-fallback-box drop-shadow-2xl rounded-2xl"
             style={{
               width: '100%',
-              maxHeight: '210px',
-              objectFit: 'contain',
-              borderRadius: '10px',
-              border: '1px solid #e2e8f0',
-              background: '#f8fafc'
+              minHeight: '260px',
+              borderRadius: '20px',
+              border: '3px dashed #94a3b8',
+              background: 'linear-gradient(135deg, #ffffff, #f8fafc)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '2rem',
+              textAlign: 'center',
+              gap: '0.6rem',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.65)'
             }}
-          />
-
-          {mode === 'unowned' && (
-            <>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f1f5f9', padding: '0.85rem 1.1rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                <span style={{ color: '#64748b', fontWeight: 600 }}>Giá Mua Đất:</span>
-                <span style={{ fontSize: '1.4rem', fontWeight: 800, color: '#0284c7' }}>
-                  {price.toLocaleString('vi-VN')} VNĐ
-                </span>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.5rem' }}>
-                <span style={{ color: '#475569' }}>Giá thuê cơ bản (Chưa nâng cấp):</span>
-                <strong style={{ color: '#16a34a', fontWeight: 700 }}>{(tile.baseRent || 20).toLocaleString('vi-VN')} VNĐ</strong>
-              </div>
-            </>
-          )}
-
-          {mode === 'self_owned' && (
-            <div style={{ background: '#f0fdf4', padding: '0.95rem', borderRadius: '12px', border: '1px solid #bbf7d0', color: '#15803d', fontSize: '0.95rem' }}>
-              <div style={{ fontWeight: 700, marginBottom: '0.35rem', fontSize: '1rem' }}>🎉 Bạn là chủ sở hữu mảnh đất này!</div>
-              <div>Cấp độ Landmark hiện tại: <strong>Cấp {currentLevel}</strong></div>
-              {nextUpgrade ? (
-                <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px dashed #86efac' }}>
-                  Nâng cấp tiếp theo: <strong>{nextUpgrade.name}</strong> ({nextUpgrade.cost.toLocaleString('vi-VN')} VNĐ)
-                </div>
-              ) : (
-                <div style={{ marginTop: '0.5rem', color: '#047857', fontWeight: 600 }}>⭐ Đã đạt cấp độ tối đa!</div>
-              )}
+          >
+            <div style={{ fontSize: '0.85rem', fontWeight: 700, color: headerColor, textTransform: 'uppercase', letterSpacing: '1.5px' }}>
+              {tile.group ? `NHÓM ĐẤT ${tile.group.toUpperCase()}` : tile.type.toUpperCase()}
             </div>
-          )}
-
-          {mode === 'rent_paid' && (
-            <div style={{ background: '#fef2f2', padding: '1rem', borderRadius: '12px', border: '1px solid #fecaca', color: '#b91c1c', fontSize: '0.95rem' }}>
-              <div style={{ fontWeight: 800, fontSize: '1.05rem', marginBottom: '0.3rem' }}>💸 ĐÃ THANH TOÁN TIỀN THUÊ</div>
-              <div>Người chơi <strong>{activePlayer ? activePlayer.name : 'Bạn'}</strong> đã dừng chân tại khu đất của người khác.</div>
-              <div style={{ marginTop: '0.4rem', padding: '0.5rem', background: '#ffffff', borderRadius: '8px', border: '1px solid #fee2e2' }}>
-                Đã trả <strong style={{ fontSize: '1.1rem' }}>{modalData.rent?.toLocaleString('vi-VN') || 0} VNĐ</strong> tiền thuê cho <strong>{ownerName}</strong>!
-              </div>
+            <div style={{ fontSize: '1.85rem', fontWeight: 800, fontFamily: 'Outfit, sans-serif', color: '#0f172a', lineHeight: '1.2' }}>
+              {tile.name}
             </div>
-          )}
-
-          {tile.upgrades && tile.upgrades.length > 0 && mode === 'unowned' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.85rem', color: '#475569' }}>
-              <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.1rem' }}>Bảng giá thuê nâng cấp Landmark:</div>
-              {tile.upgrades.slice(0, 3).map((upg, idx) => (
-                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span>⭐ Cấp {upg.level}: {upg.name || `Landmark ${upg.level}`}</span>
-                  <span style={{ fontWeight: 600, color: '#334155' }}>{upg.rent?.toLocaleString('vi-VN')} VNĐ</span>
-                </div>
-              ))}
+            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0284c7', background: '#e0f2fe', padding: '0.45rem 1.2rem', borderRadius: '999px', marginTop: '0.35rem', border: '1px solid #bae6fd' }}>
+              Giá trị ô đất: {price.toLocaleString('vi-VN')} VNĐ
             </div>
-          )}
-
-          {mode === 'unowned' && !canAfford && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#fef2f2', color: '#dc2626', padding: '0.7rem 0.9rem', borderRadius: '10px', fontSize: '0.85rem', border: '1px solid #fecaca', fontWeight: 600 }}>
-              <ShieldAlert size={18} />
-              <span>Bạn không đủ tiền mua (Hiện có: {currentMoney.toLocaleString('vi-VN')} VNĐ).</span>
+            <div style={{ fontSize: '0.82rem', color: '#64748b', fontStyle: 'italic', marginTop: '0.4rem' }}>
+              (Đang hiển thị chế độ dự phòng do chưa nạp ảnh /cards/{normalizedFileName}.webp)
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* Các nút hành động tương ứng với từng chế độ */}
-        <div className="deed-footer" style={{ padding: '1.25rem 1.5rem', background: '#f8fafc', borderTop: '1px solid #e2e8f0', display: 'flex', gap: '0.95rem' }}>
+        {/* Cảnh báo nếu không đủ tiền mua khi đang mở bán */}
+        {mode === 'unowned' && !canAfford && !imgError && (
+          <div
+            className="flex items-center gap-2 bg-red-500/90 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-md mt-3"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: 'rgba(220, 38, 38, 0.95)',
+              color: '#ffffff',
+              padding: '0.6rem 1.2rem',
+              borderRadius: '12px',
+              fontSize: '0.92rem',
+              fontWeight: 700,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.35)',
+              marginTop: '0.85rem'
+            }}
+          >
+            <ShieldAlert size={18} />
+            <span>Bạn không đủ tiền mua (Hiện có: {currentMoney.toLocaleString('vi-VN')} VNĐ).</span>
+          </div>
+        )}
+
+        {/* Cụm nút bấm trôi nổi ngay sát dưới mép ảnh */}
+        <div
+          className="flex gap-4 mt-6"
+          style={{
+            display: 'flex',
+            gap: '1.2rem',
+            marginTop: '1.5rem',
+            width: '100%',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}
+        >
           {mode === 'unowned' && (
             <button
               onClick={() => buyProperty(modalData.tileId, currentTurnPlayerId)}
               disabled={!canAfford}
-              className="btn"
+              className="btn-floating-action"
               style={{
-                flex: 1, padding: '0.85rem', fontSize: '1rem',
-                background: canAfford ? 'linear-gradient(135deg, #16a34a, #15803d)' : '#94a3b8',
-                color: '#fff', fontWeight: 700,
+                padding: '0.95rem 2.4rem',
+                fontSize: '1.05rem',
+                background: canAfford ? 'linear-gradient(135deg, #16a34a, #15803d)' : '#64748b',
+                color: '#ffffff',
+                fontWeight: 800,
                 cursor: canAfford ? 'pointer' : 'not-allowed',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-                boxShadow: canAfford ? '0 4px 12px rgba(22, 163, 74, 0.25)' : 'none',
-                borderRadius: '10px', border: 'none'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.6rem',
+                boxShadow: canAfford ? '0 12px 28px -6px rgba(22, 163, 74, 0.65), 0 0 0 2px rgba(255,255,255,0.25)' : 'none',
+                borderRadius: '9999px',
+                border: 'none',
+                transition: 'all 0.2s ease',
+                letterSpacing: '0.3px'
               }}
             >
-              <Check size={20} />
+              <Check size={22} />
               <span>Mua Ngay ({price.toLocaleString('vi-VN')} VNĐ)</span>
             </button>
           )}
@@ -226,35 +278,52 @@ export default function PropertyCardModal() {
             <button
               onClick={() => upgradeProperty(modalData.tileId, currentTurnPlayerId)}
               disabled={!canAffordUpgrade}
-              className="btn"
+              className="btn-floating-action"
               style={{
-                flex: 1, padding: '0.85rem', fontSize: '1rem',
-                background: canAffordUpgrade ? 'linear-gradient(135deg, #2563eb, #1d4ed8)' : '#94a3b8',
-                color: '#fff', fontWeight: 700,
+                padding: '0.95rem 2.4rem',
+                fontSize: '1.05rem',
+                background: canAffordUpgrade ? 'linear-gradient(135deg, #2563eb, #1d4ed8)' : '#64748b',
+                color: '#ffffff',
+                fontWeight: 800,
                 cursor: canAffordUpgrade ? 'pointer' : 'not-allowed',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-                boxShadow: canAffordUpgrade ? '0 4px 12px rgba(37, 99, 235, 0.25)' : 'none',
-                borderRadius: '10px', border: 'none'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.6rem',
+                boxShadow: canAffordUpgrade ? '0 12px 28px -6px rgba(37, 99, 235, 0.65), 0 0 0 2px rgba(255,255,255,0.25)' : 'none',
+                borderRadius: '9999px',
+                border: 'none',
+                transition: 'all 0.2s ease',
+                letterSpacing: '0.3px'
               }}
             >
-              <Check size={20} />
-              <span>Xây Nhà / Nâng Cấp</span>
+              <Check size={22} />
+              <span>Nâng Cấp ({nextUpgrade.cost.toLocaleString('vi-VN')} VNĐ)</span>
             </button>
           )}
 
           <button
             onClick={closePropertyModal}
-            className="btn"
+            className="btn-floating-action"
             style={{
-              flex: 1, padding: '0.85rem', fontSize: '1rem',
-              background: '#ffffff', border: '1px solid #cbd5e1',
-              color: '#334155', fontWeight: 600, cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-              borderRadius: '10px'
+              padding: '0.95rem 2.2rem',
+              fontSize: '1.05rem',
+              background: 'rgba(255, 255, 255, 0.95)',
+              color: '#0f172a',
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              boxShadow: '0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255,255,255,0.35)',
+              borderRadius: '9999px',
+              border: 'none',
+              transition: 'all 0.2s ease'
             }}
           >
-            <X size={20} />
-            <span>{mode === 'rent_paid' ? 'Đóng thông báo' : 'Bỏ qua'}</span>
+            <X size={22} />
+            <span>{mode === 'rent_paid' ? 'Đóng Thông Báo' : 'Bỏ Qua'}</span>
           </button>
         </div>
       </div>

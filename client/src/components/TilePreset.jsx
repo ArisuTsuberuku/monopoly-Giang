@@ -25,7 +25,25 @@ const FALLBACK_COLORS = {
 export const TEXTURE_SETTINGS = {
   // Ví dụ chỉnh sửa: 
   // 0: { rotation: Math.PI / 2, offsetX: 0.1, offsetY: -0.05, repeatX: 1, repeatY: 1 }
-  0: { rotation: 0 }
+  0: { rotation: 0 },
+  19: { rotation: Math.PI },
+  20: { rotation: Math.PI },
+  21: { rotation: Math.PI },
+  22: { rotation: Math.PI },
+  23: { rotation: Math.PI },
+  24: { rotation: Math.PI },
+  25: { rotation: Math.PI },
+  26: { rotation: Math.PI },
+  27: { rotation: Math.PI },
+  47: { rotation: -Math.PI },
+  48: { rotation: -Math.PI },
+  49: { rotation: -Math.PI },
+  50: { rotation: -Math.PI },
+  51: { rotation: -Math.PI },
+  52: { rotation: -Math.PI },
+  53: { rotation: -Math.PI },
+  54: { rotation: -Math.PI },
+  55: { rotation: -Math.PI }
 };
 
 class TextureErrorBoundary extends React.Component {
@@ -50,7 +68,7 @@ class TextureErrorBoundary extends React.Component {
 
 function TopFaceMaterial({ url, config, onSuccess }) {
   const texture = useTexture(url);
-  
+
   const cloned = useMemo(() => {
     const t = texture.clone();
     t.colorSpace = THREE.SRGBColorSpace;
@@ -94,7 +112,7 @@ export default function TilePreset({ tileData }) {
   const ownerName = ownerIdx >= 0 ? players[ownerIdx].name : '';
 
   const [textureStatus, setTextureStatus] = useState('loading'); // 'loading', 'success', 'failed'
-  
+
   const normalizedFileName = tile?.name ? tile.name.normalize('NFC') : '';
   const url = encodeURI(`/texture/${normalizedFileName}.webp`);
   const config = TEXTURE_SETTINGS[tile?.id] || {};
@@ -111,7 +129,7 @@ export default function TilePreset({ tileData }) {
         {[0, 1, 3, 4, 5].map((i) => (
           <meshStandardMaterial key={i} attach={`material-${i}`} color="#8b5a2b" roughness={0.8} />
         ))}
-        
+
         <TextureErrorBoundary url={url} fallbackColor={tileColor} onFail={() => setTextureStatus('failed')}>
           <Suspense fallback={<meshStandardMaterial attach="material-2" color={tileColor} roughness={0.5} />}>
             <TopFaceMaterial url={url} config={config} onSuccess={() => setTextureStatus('success')} />

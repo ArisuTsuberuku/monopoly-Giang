@@ -18,6 +18,8 @@ export default function App() {
   const isConnected = useGameStore((state) => state.isConnected);
   const myPlayerId = useGameStore((state) => state.myPlayerId);
   const status = useGameStore((state) => state.status);
+  const activePropertyModal = useGameStore((state) => state.activePropertyModal);
+  const isTokenAnimating = useGameStore((state) => state.isTokenAnimating);
 
   useEffect(() => {
     connectSocket();
@@ -33,7 +35,7 @@ export default function App() {
           </div>
           <div>
             <h1 className="brand-title">Monopoly Xuyên Việt 3D</h1>
-            <p className="brand-subtitle">Giai đoạn 7: Pure 2D Property Modal &amp; ROKR Landmark Flags</p>
+            <p className="brand-subtitle">Giai đoạn 23: Monopoly Plus Timing &amp; Radial Cinematic Camera</p>
           </div>
         </div>
 
@@ -74,8 +76,8 @@ export default function App() {
         </div>
       </main>
 
-      {/* Thẻ đất 2D Overlay tách biệt khỏi không gian 3D */}
-      <PropertyCardModal />
+      {/* Thẻ đất 2D Overlay tách biệt khỏi không gian 3D (Khóa khi Token đang nhảy) */}
+      {activePropertyModal && !isTokenAnimating && <PropertyCardModal />}
 
       {/* --- FOOTER --- */}
       <footer className="app-footer">

@@ -27,6 +27,8 @@ export const useGameStore = create((set, get) => ({
   activePropertyModal: null, // { tileId, price, mode: 'unowned' | 'self_owned' | 'rent_paid' }
   cinematicTileId: null, // ID ô đất cho hoạt ảnh Cinematic Camera
   targetPlayerCount: 4, // Số lượng người chơi mục tiêu trong phòng (2, 3, 4 - tự động điền Bot nếu thiếu)
+  isTokenAnimating: false,
+  setTokenAnimating: (status) => set({ isTokenAnimating: status }),
 
   /**
    * Cập nhật số lượng người chơi mong muốn trong phòng (2, 3, 4)
@@ -70,13 +72,27 @@ export const useGameStore = create((set, get) => ({
 
       // Lắng nghe cập nhật toàn bộ trạng thái ván cờ từ server
       socket.on('state_update', (payload) => {
+        const currentState = get();
+        let overrideAnimating = currentState.isTokenAnimating;
+
+        // Kiểm tra xem vị trí của active player trong payload có khác vị trí hiện tại trong store không
+        if (payload.players && currentState.players) {
+          const activeId = payload.currentTurnPlayerId || currentState.currentTurnPlayerId;
+          const currentActive = currentState.players.find((p) => p.id === activeId);
+          const newActive = payload.players.find((p) => p.id === activeId);
+          if (currentActive && newActive && currentActive.position !== newActive.position) {
+            overrideAnimating = true; // Khóa UI ngay lập tức vì Token chắc chắn sẽ phải di chuyển
+          }
+        }
+
         set({
           status: payload.status || 'waiting',
           players: payload.players || [],
           properties: payload.properties || {},
           board: payload.board || [],
           currentTurnPlayerId: payload.currentTurnPlayerId || null,
-          hasRolledThisTurn: Boolean(payload.hasRolledThisTurn)
+          hasRolledThisTurn: Boolean(payload.hasRolledThisTurn),
+          isTokenAnimating: overrideAnimating
         });
       });
 
@@ -86,10 +102,12 @@ export const useGameStore = create((set, get) => ({
           const nextLogs = [...state.logs, payload];
           let nextModal = state.activePropertyModal;
           let nextCinematicTile = state.cinematicTileId;
+          let nextAnimating = state.isTokenAnimating;
 
-          // Nếu đây là sự kiện roll, cập nhật cinematicTileId để camera bay cận cảnh
+          // Nếu đây là sự kiện roll, cập nhật cinematicTileId và KHÓA NGAY LẬP TỨC UI (Eager Lock)
           if (payload.type === 'roll' && typeof payload.newPosition === 'number') {
             nextCinematicTile = payload.newPosition;
+            nextAnimating = true; // KHÓA NGAY LẬP TỨC để tránh nháy Modal
           }
 
           // Kiểm tra mở modal: cho phép cả khi là myPlayerId hoặc local multiplayer id / bất kỳ ai đang ở lượt của họ trên client
@@ -130,7 +148,7 @@ export const useGameStore = create((set, get) => ({
             nextCinematicTile = null;
           }
 
-          return { logs: nextLogs, activePropertyModal: nextModal, cinematicTileId: nextCinematicTile };
+          return { logs: nextLogs, activePropertyModal: nextModal, cinematicTileId: nextCinematicTile, isTokenAnimating: nextAnimating };
         });
       });
 
@@ -214,6 +232,7 @@ export const useGameStore = create((set, get) => ({
     const { socket } = get();
     if (socket && socket.connected) {
       get().clearError();
+      set({ isTokenAnimating: true }); // KHÓA NGAY LẬP TỨC (Eager Lock)
       socket.emit('roll_dice');
     }
   },

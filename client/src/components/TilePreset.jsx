@@ -1,56 +1,87 @@
-import React, { Suspense, useState } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
+import * as THREE from 'three';
 import { useTexture, Text } from '@react-three/drei';
 import { TOKEN_COLORS } from './PlayerToken';
 
-/**
- * Error Boundary chuyên biệt cho R3F Texture / Material loading
- */
+const FALLBACK_COLORS = {
+  // Theo Group (Đất thường)
+  light_green: '#4ade80', dark_green: '#16a34a',
+  yellow: '#facc15', orange: '#f97316',
+  red: '#ef4444', cyan: '#06b6d4',
+  blue: '#3b82f6', magenta: '#d946ef', purple: '#a855f7',
+  // Theo Type (Các ô chức năng không có group)
+  airport: '#0ea5e9',   // Xanh da trời đậm (Sân bay)
+  utility: '#fbbf24',   // Vàng đồng (Điểm cực)
+  tax: '#f87171',       // Đỏ nhạt (Thuế)
+  chance: '#c084fc',    // Tím nhạt (Cơ hội)
+  chest: '#f472b6',     // Hồng nhạt (Khí vận)
+  jail: '#ea580c',      // Cam sậm (Thăm tù)
+  go_to_jail: '#ea580c',// Cam sậm (Vào tù)
+  parking: '#14b8a6',   // Xanh ngọc (Bãi đỗ xe)
+  go: '#22c55e'         // Xanh lá (Khởi hành)
+};
+
+// Cấu hình xoay Texture (Sử dụng Math.PI / 2, Math.PI, v.v...)
+export const TEXTURE_SETTINGS = {
+  // Ví dụ chỉnh sửa: 
+  // 0: { rotation: Math.PI / 2, offsetX: 0.1, offsetY: -0.05, repeatX: 1, repeatY: 1 }
+  0: { rotation: 0 }
+};
+
 class TextureErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
-
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(error) {
     return { hasError: true };
   }
-
   componentDidCatch(error) {
-    if (this.props.onError) {
-      this.props.onError();
-    }
+    console.warn(`[R3F Missing] Không tìm thấy: ${this.props.url}`);
+    if (this.props.onFail) this.props.onFail();
   }
-
   render() {
     if (this.state.hasError) {
-      return this.props.fallback;
+      return <meshStandardMaterial attach="material-2" color={this.props.fallbackColor} roughness={0.5} />;
     }
     return this.props.children;
   }
 }
 
-/**
- * Component tải ảnh texture .png cho mặt Top (material-2)
- */
-function TopFaceTexture({ tileName, attach = "material-2", isMortgaged }) {
-  const texture = useTexture(`/texture/${tileName}.png`);
-  return (
-    <meshStandardMaterial
-      attach={attach}
-      map={texture}
-      roughness={0.35}
-      metalness={0.15}
-      opacity={isMortgaged ? 0.4 : 1.0}
-      transparent={Boolean(isMortgaged)}
-    />
-  );
+function TopFaceMaterial({ url, config, onSuccess }) {
+  const texture = useTexture(url);
+  
+  const cloned = useMemo(() => {
+    const t = texture.clone();
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = THREE.RepeatWrapping;
+    t.wrapT = THREE.RepeatWrapping;
+    t.center.set(0.5, 0.5);
+    t.rotation = config.rotation || 0;
+    if (config.offsetX !== undefined || config.offsetY !== undefined) {
+      t.offset.set(config.offsetX || 0, config.offsetY || 0);
+    }
+    if (config.repeatX !== undefined || config.repeatY !== undefined) {
+      t.repeat.set(config.repeatX || 1, config.repeatY || 1);
+    }
+    t.needsUpdate = true;
+    return t;
+  }, [texture, config]);
+
+  // Gọi callback khi render thành công
+  useEffect(() => {
+    if (onSuccess) onSuccess();
+  }, [onSuccess]);
+
+  return <meshStandardMaterial attach="material-2" map={cloned} color="#ffffff" roughness={0.5} transparent={true} alphaTest={0.05} />;
 }
 
 /**
  * Component quản lý ô đất (Auto-Texture Mapping với BoxGeometry & Graceful Degradation)
  */
 export default function TilePreset({ tileData }) {
-  const { tile, coords, tileColor, isMortgaged, players = [], properties = {} } = tileData;
+  const { tile, coords, tileColor: propTileColor, isMortgaged, players = [], properties = {} } = tileData;
+  const tileColor = tile?.group ? FALLBACK_COLORS[tile.group] : (FALLBACK_COLORS[tile?.type] || propTileColor || '#cbd5e1');
 
   // ĐẢM BẢO đọc state sở hữu và level chuẩn xác theo tile.id, tuyệt đối không dùng index của mảng
   const tileId = tile?.id !== undefined ? tile.id : 0;
@@ -62,66 +93,46 @@ export default function TilePreset({ tileData }) {
   const ownerColor = ownerIdx >= 0 ? TOKEN_COLORS[ownerIdx % TOKEN_COLORS.length] : '#0284c7';
   const ownerName = ownerIdx >= 0 ? players[ownerIdx].name : '';
 
+  const [textureStatus, setTextureStatus] = useState('loading'); // 'loading', 'success', 'failed'
+  
+  const normalizedFileName = tile?.name ? tile.name.normalize('NFC') : '';
+  const url = encodeURI(`/texture/${normalizedFileName}.webp`);
+  const config = TEXTURE_SETTINGS[tile?.id] || {};
+
   const pos = coords.position || [coords.x, coords.y, coords.z];
   const rot = coords.rotation || [0, 0, 0];
   const size = coords.size || [1.0, 0.4, 1.6];
 
-  const [textureFailed, setTextureFailed] = useState(false);
-
-  // Material dự phòng (Fallback) cho mặt Top khi ảnh texture chưa có hoặc đang tải
-  const fallbackTopMaterial = (
-    <meshStandardMaterial
-      attach="material-2"
-      color={tileColor}
-      roughness={0.35}
-      metalness={0.15}
-      opacity={isMortgaged ? 0.4 : 1.0}
-      transparent={Boolean(isMortgaged)}
-    />
-  );
-
   return (
     <group position={pos} rotation={rot}>
-      {/* Khối nền chính BoxGeometry với 6 mặt (Auto-Texture Mapping) */}
       <mesh receiveShadow castShadow>
         <boxGeometry args={size} />
-        {/* Mặt 0: Right (Viền gỗ) */}
-        <meshStandardMaterial attach="material-0" color="#8b5a2b" roughness={0.8} metalness={0.1} />
-        {/* Mặt 1: Left (Viền gỗ) */}
-        <meshStandardMaterial attach="material-1" color="#8b5a2b" roughness={0.8} metalness={0.1} />
-        {/* Mặt 2: Top Face (Dán ảnh PNG qua useTexture, nếu lỗi/thiếu thì hiển thị màu tileColor) */}
-        <TextureErrorBoundary
-          fallback={fallbackTopMaterial}
-          onError={() => setTextureFailed(true)}
-        >
-          <Suspense fallback={fallbackTopMaterial}>
-            <TopFaceTexture
-              tileName={tile?.name || `tile_${tileId}`}
-              isMortgaged={isMortgaged}
-            />
+        {/* Render 5 mặt viền màu gỗ */}
+        {[0, 1, 3, 4, 5].map((i) => (
+          <meshStandardMaterial key={i} attach={`material-${i}`} color="#8b5a2b" roughness={0.8} />
+        ))}
+        
+        <TextureErrorBoundary url={url} fallbackColor={tileColor} onFail={() => setTextureStatus('failed')}>
+          <Suspense fallback={<meshStandardMaterial attach="material-2" color={tileColor} roughness={0.5} />}>
+            <TopFaceMaterial url={url} config={config} onSuccess={() => setTextureStatus('success')} />
           </Suspense>
         </TextureErrorBoundary>
-        {/* Mặt 3: Bottom (Viền gỗ) */}
-        <meshStandardMaterial attach="material-3" color="#8b5a2b" roughness={0.8} metalness={0.1} />
-        {/* Mặt 4: Front (Viền gỗ) */}
-        <meshStandardMaterial attach="material-4" color="#8b5a2b" roughness={0.8} metalness={0.1} />
-        {/* Mặt 5: Back (Viền gỗ) */}
-        <meshStandardMaterial attach="material-5" color="#8b5a2b" roughness={0.8} metalness={0.1} />
       </mesh>
 
-      {/* Nhãn chữ hiển thị khi chưa có texture hoặc fallback màu nền (xoay [-Math.PI / 2, 0, 0] để chân chữ hướng ra ngoài) */}
-      {textureFailed && (
+      {/* Chỉ hiện Fallback Text nếu Texture bị lỗi 404 */}
+      {textureStatus === 'failed' && (
         <Text
-          position={[0, size[1] / 2 + 0.02, 0]}
-          rotation={[-Math.PI / 2, 0, 0]}
-          fontSize={size[0] > 1.4 ? 0.32 : 0.22}
+          position={[0, size[1] / 2 + 0.01, 0]}
+          rotation={coords.textRotation || [-Math.PI / 2, 0, 0]}
+          fontSize={size[0] > 1.4 ? 0.28 : 0.20}
           color={tileColor === '#ffffff' || tileColor === '#f8fafc' || tileColor === '#cbd5e1' ? '#0f172a' : '#ffffff'}
           anchorX="center"
           anchorY="middle"
-          maxWidth={size[0] * 0.9}
           textAlign="center"
+          outlineWidth={0.01}
+          outlineColor="#000000"
         >
-          {tile?.name ? `${tile.name}\n(#${tileId})` : `#${tileId}`}
+          {`${tile?.name || ''}\n(#${tileId})`}
         </Text>
       )}
 

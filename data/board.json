@@ -1,248 +1,14 @@
 [
   {
-    "tileIndex": 0,
-    "id": "go",
+    "id": 0,
     "name": "Khởi Hành",
-    "type": "go",
-    "salary": 2000
+    "type": "go"
   },
   {
-    "tileIndex": 1,
     "id": 1,
-    "name": "Tuyên Quang",
-    "type": "property",
-    "group": "green",
-    "price": 690,
-    "mortgageValue": 345,
-    "baseRent": 40,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Hà Giang&Tuyên Quang",
-        "cost": 480,
-        "rent": 415
-      },
-      {
-        "level": 2,
-        "name": "Đèo Mã Pí Lèng",
-        "cost": 410,
-        "rent": 760
-      },
-      {
-        "level": 3,
-        "name": "Cột cờ Lũng Cú",
-        "cost": 410,
-        "rent": 1725
-      },
-      {
-        "level": 4,
-        "name": "Khu di tích Tân Trào",
-        "cost": 410,
-        "rent": 2415
-      },
-      {
-        "level": 5,
-        "name": "Cao nguyên đá Đồng Văn",
-        "cost": 450,
-        "rent": 3450
-      }
-    ]
-  },
-  {
-    "tileIndex": 2,
-    "id": 2,
-    "name": "Lào Cai",
-    "type": "property",
-    "group": "green",
-    "price": 660,
-    "mortgageValue": 330,
-    "baseRent": 40,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Lào Cai + Yên Bái",
-        "cost": 460,
-        "rent": 395
-      },
-      {
-        "level": 2,
-        "name": "Ruộng bậc thang Mù Cang Chải",
-        "cost": 400,
-        "rent": 725
-      },
-      {
-        "level": 3,
-        "name": "Hồ Thác Bà",
-        "cost": 400,
-        "rent": 1650
-      },
-      {
-        "level": 4,
-        "name": "Sa Pa",
-        "cost": 400,
-        "rent": 2310
-      },
-      {
-        "level": 5,
-        "name": "Đỉnh Fansipan",
-        "cost": 430,
-        "rent": 3300
-      }
-    ]
-  },
-  {
-    "tileIndex": 3,
-    "id": "chance_3",
-    "name": "Cơ Hội",
-    "type": "chance"
-  },
-  {
-    "tileIndex": 4,
-    "id": 3,
-    "name": "Thái Nguyên",
-    "type": "property",
-    "group": "green",
-    "price": 420,
-    "mortgageValue": 210,
-    "baseRent": 25,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Bắc Kạn + Thái Nguyên",
-        "cost": 290,
-        "rent": 250
-      },
-      {
-        "level": 2,
-        "name": "Hồ Núi Cốc",
-        "cost": 250,
-        "rent": 460
-      },
-      {
-        "level": 3,
-        "name": "Vùng chè Tân Cương",
-        "cost": 250,
-        "rent": 1050
-      },
-      {
-        "level": 4,
-        "name": "Bảo tàng Văn hóa các Dân tộc Việt Nam",
-        "cost": 250,
-        "rent": 1470
-      },
-      {
-        "level": 5,
-        "name": "Hồ Ba Bể",
-        "cost": 270,
-        "rent": 2100
-      }
-    ]
-  },
-  {
-    "tileIndex": 5,
-    "id": 7,
-    "name": "Cao Bằng",
-    "type": "property",
-    "group": "green",
-    "price": 340,
-    "mortgageValue": 170,
-    "baseRent": 40,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Đèo Mã Phục",
-        "cost": 200,
-        "rent": 170
-      },
-      {
-        "level": 2,
-        "name": "Núi Mắt Thần",
-        "cost": 200,
-        "rent": 375
-      },
-      {
-        "level": 3,
-        "name": "Hang Pác Bó",
-        "cost": 200,
-        "rent": 850
-      },
-      {
-        "level": 4,
-        "name": "Làng rèn Phúc Sen",
-        "cost": 200,
-        "rent": 1190
-      },
-      {
-        "level": 5,
-        "name": "Thác Bản Giốc",
-        "cost": 220,
-        "rent": 1700
-      }
-    ]
-  },
-  {
-    "tileIndex": 6,
-    "id": 11,
-    "name": "Sơn La",
-    "type": "property",
-    "group": "green",
-    "price": 710,
-    "mortgageValue": 355,
-    "baseRent": 85,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Đỉnh Tà Xùa",
-        "cost": 430,
-        "rent": 355
-      },
-      {
-        "level": 2,
-        "name": "Đỉnh Pha Luông",
-        "cost": 430,
-        "rent": 780
-      },
-      {
-        "level": 3,
-        "name": "Bản Lướt",
-        "cost": 430,
-        "rent": 1775
-      },
-      {
-        "level": 4,
-        "name": "Thủy điện Sơn La",
-        "cost": 430,
-        "rent": 2485
-      },
-      {
-        "level": 5,
-        "name": "Cao nguyên Mộc Châu",
-        "cost": 460,
-        "rent": 3550
-      }
-    ]
-  },
-  {
-    "tileIndex": 7,
-    "id": 36,
-    "name": "Sân bay quốc tế Tân Sơn Nhất",
-    "type": "airport",
-    "price": 500,
-    "mortgageValue": 250,
-    "baseRent": 70,
-    "rentByCount": [
-      70,
-      150,
-      350,
-      500
-    ]
-  },
-  {
-    "tileIndex": 8,
-    "id": 6,
     "name": "Lai Châu",
     "type": "property",
-    "group": "green",
+    "group": "light_green",
     "price": 450,
     "mortgageValue": 225,
     "baseRent": 55,
@@ -280,11 +46,10 @@
     ]
   },
   {
-    "tileIndex": 9,
-    "id": 8,
+    "id": 2,
     "name": "Điện Biên",
     "type": "property",
-    "group": "green",
+    "group": "light_green",
     "price": 480,
     "mortgageValue": 240,
     "baseRent": 60,
@@ -322,25 +87,97 @@
     ]
   },
   {
-    "tileIndex": 10,
-    "id": 39,
-    "name": "Điểm Cực Nam",
-    "type": "utility",
-    "price": 300,
-    "mortgageValue": 150,
-    "diceMultipliers": [
-      10,
-      20,
-      35,
-      50
+    "id": 3,
+    "name": "Khí Vận",
+    "type": "chest"
+  },
+  {
+    "id": 4,
+    "name": "Sơn La",
+    "type": "property",
+    "group": "light_green",
+    "price": 710,
+    "mortgageValue": 355,
+    "baseRent": 85,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Đỉnh Tà Xùa",
+        "cost": 430,
+        "rent": 355
+      },
+      {
+        "level": 2,
+        "name": "Đỉnh Pha Luông",
+        "cost": 430,
+        "rent": 780
+      },
+      {
+        "level": 3,
+        "name": "Bản Lướt",
+        "cost": 430,
+        "rent": 1775
+      },
+      {
+        "level": 4,
+        "name": "Thủy điện Sơn La",
+        "cost": 430,
+        "rent": 2485
+      },
+      {
+        "level": 5,
+        "name": "Cao nguyên Mộc Châu",
+        "cost": 460,
+        "rent": 3550
+      }
     ]
   },
   {
-    "tileIndex": 11,
-    "id": 4,
+    "id": 5,
+    "name": "Cao Bằng",
+    "type": "property",
+    "group": "light_green",
+    "price": 340,
+    "mortgageValue": 170,
+    "baseRent": 40,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Đèo Mã Phục",
+        "cost": 200,
+        "rent": 170
+      },
+      {
+        "level": 2,
+        "name": "Núi Mắt Thần",
+        "cost": 200,
+        "rent": 375
+      },
+      {
+        "level": 3,
+        "name": "Hang Pác Bó",
+        "cost": 200,
+        "rent": 850
+      },
+      {
+        "level": 4,
+        "name": "Làng rèn Phúc Sen",
+        "cost": 200,
+        "rent": 1190
+      },
+      {
+        "level": 5,
+        "name": "Thác Bản Giốc",
+        "cost": 220,
+        "rent": 1700
+      }
+    ]
+  },
+  {
+    "id": 6,
     "name": "Lạng Sơn",
     "type": "property",
-    "group": "green",
+    "group": "light_green",
     "price": 420,
     "mortgageValue": 210,
     "baseRent": 50,
@@ -378,8 +215,200 @@
     ]
   },
   {
-    "tileIndex": 12,
+    "id": 7,
+    "name": "Điểm cực Bắc",
+    "type": "utility",
+    "price": 300,
+    "mortgageValue": 150,
+    "diceMultipliers": [
+      10,
+      20,
+      35,
+      50
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Tuyên Quang",
+    "type": "property",
+    "group": "dark_green",
+    "price": 690,
+    "mortgageValue": 345,
+    "baseRent": 40,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Hà Giang&Tuyên Quang",
+        "cost": 480,
+        "rent": 415
+      },
+      {
+        "level": 2,
+        "name": "Đèo Mã Pí Lèng",
+        "cost": 410,
+        "rent": 760
+      },
+      {
+        "level": 3,
+        "name": "Cột cờ Lũng Cú",
+        "cost": 410,
+        "rent": 1725
+      },
+      {
+        "level": 4,
+        "name": "Khu di tích Tân Trào",
+        "cost": 410,
+        "rent": 2415
+      },
+      {
+        "level": 5,
+        "name": "Cao nguyên đá Đồng Văn",
+        "cost": 450,
+        "rent": 3450
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Cơ Hội",
+    "type": "chance"
+  },
+  {
+    "id": 10,
+    "name": "Phú Thọ",
+    "type": "property",
+    "group": "dark_green",
+    "price": 470,
+    "mortgageValue": 235,
+    "baseRent": 30,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Hòa Bình + Vĩnh Phúc + Phú Thọ",
+        "cost": 330,
+        "rent": 330
+      },
+      {
+        "level": 2,
+        "name": "Thung lũng văn hóa Mai Châu",
+        "cost": 280,
+        "rent": 515
+      },
+      {
+        "level": 3,
+        "name": "Tam Đảo",
+        "cost": 280,
+        "rent": 1175
+      },
+      {
+        "level": 4,
+        "name": "Hồ Thủy điện Hòa Bình",
+        "cost": 280,
+        "rent": 1645
+      },
+      {
+        "level": 5,
+        "name": "Đền Hùng",
+        "cost": 310,
+        "rent": 2350
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Tổng cục thuế",
+    "type": "tax",
+    "amount": 200
+  },
+  {
     "id": 12,
+    "name": "Lào Cai",
+    "type": "property",
+    "group": "dark_green",
+    "price": 660,
+    "mortgageValue": 330,
+    "baseRent": 40,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Lào Cai + Yên Bái",
+        "cost": 460,
+        "rent": 395
+      },
+      {
+        "level": 2,
+        "name": "Ruộng bậc thang Mù Cang Chải",
+        "cost": 400,
+        "rent": 725
+      },
+      {
+        "level": 3,
+        "name": "Hồ Thác Bà",
+        "cost": 400,
+        "rent": 1650
+      },
+      {
+        "level": 4,
+        "name": "Sa Pa",
+        "cost": 400,
+        "rent": 2310
+      },
+      {
+        "level": 5,
+        "name": "Đỉnh Fansipan",
+        "cost": 430,
+        "rent": 3300
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Thái Nguyên",
+    "type": "property",
+    "group": "dark_green",
+    "price": 420,
+    "mortgageValue": 210,
+    "baseRent": 25,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Bắc Kạn + Thái Nguyên",
+        "cost": 290,
+        "rent": 250
+      },
+      {
+        "level": 2,
+        "name": "Hồ Núi Cốc",
+        "cost": 250,
+        "rent": 460
+      },
+      {
+        "level": 3,
+        "name": "Vùng chè Tân Cương",
+        "cost": 250,
+        "rent": 1050
+      },
+      {
+        "level": 4,
+        "name": "Bảo tàng Văn hóa các Dân tộc Việt Nam",
+        "cost": 250,
+        "rent": 1470
+      },
+      {
+        "level": 5,
+        "name": "Hồ Ba Bể",
+        "cost": 270,
+        "rent": 2100
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Khí Vận",
+    "type": "chest"
+  },
+  {
+    "id": 15,
     "name": "Hà Nội",
     "type": "property",
     "group": "yellow",
@@ -420,14 +449,21 @@
     ]
   },
   {
-    "tileIndex": 13,
-    "id": "chest_13",
-    "name": "Khí Vận",
-    "type": "chest"
+    "id": 16,
+    "name": "Sân bay Nội Bài",
+    "type": "airport",
+    "price": 500,
+    "mortgageValue": 250,
+    "baseRent": 70,
+    "rentByCount": [
+      70,
+      150,
+      350,
+      500
+    ]
   },
   {
-    "tileIndex": 15,
-    "id": 10,
+    "id": 17,
     "name": "Quảng Ninh",
     "type": "property",
     "group": "yellow",
@@ -468,8 +504,12 @@
     ]
   },
   {
-    "tileIndex": 16,
-    "id": 13,
+    "id": 18,
+    "name": "Thăm Tù",
+    "type": "jail"
+  },
+  {
+    "id": 19,
     "name": "Bắc Ninh",
     "type": "property",
     "group": "orange",
@@ -510,15 +550,12 @@
     ]
   },
   {
-    "tileIndex": 16,
-    "id": "tax_17",
-    "name": "Tổng cục thuế",
-    "type": "tax",
-    "amount": 200
+    "id": 20,
+    "name": "Cơ Hội",
+    "type": "chance"
   },
   {
-    "tileIndex": 18,
-    "id": 17,
+    "id": 21,
     "name": "Hưng Yên",
     "type": "property",
     "group": "orange",
@@ -559,63 +596,14 @@
     ]
   },
   {
-    "tileIndex": 18,
-    "id": "jail",
-    "name": "Thăm Tù",
-    "type": "jail"
+    "id": 22,
+    "name": "Ngân hàng nhà nước",
+    "type": "tax",
+    "amount": 1000
   },
   {
-    "tileIndex": 19,
-    "id": "chest_19",
-    "name": "Khí Vận",
-    "type": "chest"
-  },
-  {
-    "tileIndex": 20,
-    "id": 9,
-    "name": "Ninh Bình",
-    "type": "property",
-    "group": "orange",
-    "price": 200,
-    "mortgageValue": 100,
-    "baseRent": 10,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Hà Nam +Ninh Bình + Nam Định",
-        "cost": 140,
-        "rent": 140
-      },
-      {
-        "level": 2,
-        "name": "Vườn quốc gia Cúc Phương",
-        "cost": 120,
-        "rent": 220
-      },
-      {
-        "level": 3,
-        "name": "Chùa Bái Đính",
-        "cost": 120,
-        "rent": 500
-      },
-      {
-        "level": 4,
-        "name": "Cố đô Hoa Lư",
-        "cost": 120,
-        "rent": 700
-      },
-      {
-        "level": 5,
-        "name": "Quần thể danh thắng Tràng An",
-        "cost": 130,
-        "rent": 1000
-      }
-    ]
-  },
-  {
-    "tileIndex": 21,
-    "id": 35,
-    "name": "Sân bay quốc tế Đà Nẵng",
+    "id": 23,
+    "name": "Sân bay Cát Bi",
     "type": "airport",
     "price": 500,
     "mortgageValue": 250,
@@ -628,8 +616,7 @@
     ]
   },
   {
-    "tileIndex": 22,
-    "id": 15,
+    "id": 24,
     "name": "Hải Phòng",
     "type": "property",
     "group": "orange",
@@ -670,51 +657,54 @@
     ]
   },
   {
-    "tileIndex": 23,
-    "id": 21,
-    "name": "Huế",
+    "id": 25,
+    "name": "Khí Vận",
+    "type": "chest"
+  },
+  {
+    "id": 26,
+    "name": "Ninh Bình",
     "type": "property",
-    "group": "red",
-    "price": 250,
-    "mortgageValue": 125,
-    "baseRent": 30,
+    "group": "orange",
+    "price": 200,
+    "mortgageValue": 100,
+    "baseRent": 10,
     "upgrades": [
       {
         "level": 1,
-        "name": "Sông Hương",
-        "cost": 150,
-        "rent": 125
+        "name": "Hà Nam +Ninh Bình + Nam Định",
+        "cost": 140,
+        "rent": 140
       },
       {
         "level": 2,
-        "name": "Vịnh Lăng Cô",
-        "cost": 150,
-        "rent": 275
+        "name": "Vườn quốc gia Cúc Phương",
+        "cost": 120,
+        "rent": 220
       },
       {
         "level": 3,
-        "name": "Chùa Thiên Mụ",
-        "cost": 150,
-        "rent": 625
+        "name": "Chùa Bái Đính",
+        "cost": 120,
+        "rent": 500
       },
       {
         "level": 4,
-        "name": "Vườn quốc gia Bạch Mã",
-        "cost": 150,
-        "rent": 875
+        "name": "Cố đô Hoa Lư",
+        "cost": 120,
+        "rent": 700
       },
       {
         "level": 5,
-        "name": "Cố đô Huế",
-        "cost": 160,
-        "rent": 1250
+        "name": "Quần thể danh thắng Tràng An",
+        "cost": 130,
+        "rent": 1000
       }
     ]
   },
   {
-    "tileIndex": 24,
-    "id": 41,
-    "name": "Điểm Cực Tây",
+    "id": 27,
+    "name": "Điểm cực Đông",
     "type": "utility",
     "price": 300,
     "mortgageValue": 150,
@@ -726,104 +716,12 @@
     ]
   },
   {
-    "tileIndex": 25,
-    "id": 16,
-    "name": "Nghệ An",
-    "type": "property",
-    "group": "red",
-    "price": 820,
-    "mortgageValue": 410,
-    "baseRent": 100,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Biển Cửa Lò",
-        "cost": 490,
-        "rent": 410
-      },
-      {
-        "level": 2,
-        "name": "Sông Lam",
-        "cost": 490,
-        "rent": 900
-      },
-      {
-        "level": 3,
-        "name": "Vườn quốc gia Pù Mát",
-        "cost": 490,
-        "rent": 2050
-      },
-      {
-        "level": 4,
-        "name": "Đền Ông Hoàng Mười",
-        "cost": 490,
-        "rent": 2870
-      },
-      {
-        "level": 5,
-        "name": "Khu di tích Kim Liên",
-        "cost": 530,
-        "rent": 4100
-      }
-    ]
-  },
-  {
-    "tileIndex": 26,
-    "id": 18,
-    "name": "Quảng Trị",
-    "type": "property",
-    "group": "red",
-    "price": 640,
-    "mortgageValue": 320,
-    "baseRent": 40,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Quảng Bình + Quảng Trị",
-        "cost": 450,
-        "rent": 385
-      },
-      {
-        "level": 2,
-        "name": "Sông Bến Hải",
-        "cost": 380,
-        "rent": 705
-      },
-      {
-        "level": 3,
-        "name": "Thành cổ Quảng Trị",
-        "cost": 380,
-        "rent": 1600
-      },
-      {
-        "level": 4,
-        "name": "Nghĩa trang Trường Sơn",
-        "cost": 380,
-        "rent": 2240
-      },
-      {
-        "level": 5,
-        "name": "Hang Sơn Đoòng",
-        "cost": 420,
-        "rent": 3200
-      }
-    ]
-  },
-  {
-    "tileIndex": 27,
-    "id": "chance_27",
-    "name": "Cơ Hội",
-    "type": "chance"
-  },
-  {
-    "tileIndex": 28,
-    "id": "parking",
+    "id": 28,
     "name": "Bãi Đỗ Xe",
     "type": "parking"
   },
   {
-    "tileIndex": 29,
-    "id": 14,
+    "id": 29,
     "name": "Thanh Hóa",
     "type": "property",
     "group": "red",
@@ -864,8 +762,48 @@
     ]
   },
   {
-    "tileIndex": 30,
-    "id": 20,
+    "id": 30,
+    "name": "Nghệ An",
+    "type": "property",
+    "group": "red",
+    "price": 820,
+    "mortgageValue": 410,
+    "baseRent": 100,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Biển Cửa Lò",
+        "cost": 490,
+        "rent": 410
+      },
+      {
+        "level": 2,
+        "name": "Sông Lam",
+        "cost": 490,
+        "rent": 900
+      },
+      {
+        "level": 3,
+        "name": "Vườn quốc gia Pù Mát",
+        "cost": 490,
+        "rent": 2050
+      },
+      {
+        "level": 4,
+        "name": "Đền Ông Hoàng Mười",
+        "cost": 490,
+        "rent": 2870
+      },
+      {
+        "level": 5,
+        "name": "Khu di tích Kim Liên",
+        "cost": 530,
+        "rent": 4100
+      }
+    ]
+  },
+  {
+    "id": 31,
     "name": "Hà Tĩnh",
     "type": "property",
     "group": "red",
@@ -906,14 +844,94 @@
     ]
   },
   {
-    "tileIndex": 31,
-    "id": "chest_31",
-    "name": "Khí Vận",
-    "type": "chest"
+    "id": 32,
+    "name": "Quảng Trị",
+    "type": "property",
+    "group": "red",
+    "price": 640,
+    "mortgageValue": 320,
+    "baseRent": 40,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Quảng Bình + Quảng Trị",
+        "cost": 450,
+        "rent": 385
+      },
+      {
+        "level": 2,
+        "name": "Sông Bến Hải",
+        "cost": 380,
+        "rent": 705
+      },
+      {
+        "level": 3,
+        "name": "Thành cổ Quảng Trị",
+        "cost": 380,
+        "rent": 1600
+      },
+      {
+        "level": 4,
+        "name": "Nghĩa trang Trường Sơn",
+        "cost": 380,
+        "rent": 2240
+      },
+      {
+        "level": 5,
+        "name": "Hang Sơn Đoòng",
+        "cost": 420,
+        "rent": 3200
+      }
+    ]
   },
   {
-    "tileIndex": 32,
-    "id": 23,
+    "id": 33,
+    "name": "Huế",
+    "type": "property",
+    "group": "red",
+    "price": 250,
+    "mortgageValue": 125,
+    "baseRent": 30,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Sông Hương",
+        "cost": 150,
+        "rent": 125
+      },
+      {
+        "level": 2,
+        "name": "Vịnh Lăng Cô",
+        "cost": 150,
+        "rent": 275
+      },
+      {
+        "level": 3,
+        "name": "Chùa Thiên Mụ",
+        "cost": 150,
+        "rent": 625
+      },
+      {
+        "level": 4,
+        "name": "Vườn quốc gia Bạch Mã",
+        "cost": 150,
+        "rent": 875
+      },
+      {
+        "level": 5,
+        "name": "Cố đô Huế",
+        "cost": 160,
+        "rent": 1250
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Cơ Hội",
+    "type": "chance"
+  },
+  {
+    "id": 35,
     "name": "Đà Nẵng",
     "type": "property",
     "group": "cyan",
@@ -954,50 +972,21 @@
     ]
   },
   {
-    "tileIndex": 33,
-    "id": 19,
-    "name": "Khánh Hòa",
-    "type": "property",
-    "group": "cyan",
-    "price": 430,
-    "mortgageValue": 215,
-    "baseRent": 25,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Khánh Hòa + Ninh Thuận",
-        "cost": 300,
-        "rent": 260
-      },
-      {
-        "level": 2,
-        "name": "Vịnh Vân Phong",
-        "cost": 260,
-        "rent": 475
-      },
-      {
-        "level": 3,
-        "name": "Vịnh Vĩnh Hy",
-        "cost": 260,
-        "rent": 1075
-      },
-      {
-        "level": 4,
-        "name": "Tháp Bà Ponagar",
-        "cost": 260,
-        "rent": 1505
-      },
-      {
-        "level": 5,
-        "name": "Biển Nha Trang",
-        "cost": 280,
-        "rent": 2150
-      }
+    "id": 36,
+    "name": "Sân bay Đà Nẵng",
+    "type": "airport",
+    "price": 500,
+    "mortgageValue": 250,
+    "baseRent": 70,
+    "rentByCount": [
+      70,
+      150,
+      350,
+      500
     ]
   },
   {
-    "tileIndex": 34,
-    "id": 22,
+    "id": 37,
     "name": "Quảng Ngãi",
     "type": "property",
     "group": "cyan",
@@ -1038,23 +1027,48 @@
     ]
   },
   {
-    "tileIndex": 35,
-    "id": 37,
-    "name": "Sân bay quốc tế Nội Bài",
-    "type": "airport",
-    "price": 500,
-    "mortgageValue": 250,
-    "baseRent": 70,
-    "rentByCount": [
-      70,
-      150,
-      350,
-      500
+    "id": 38,
+    "name": "Khánh Hòa",
+    "type": "property",
+    "group": "cyan",
+    "price": 430,
+    "mortgageValue": 215,
+    "baseRent": 25,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Khánh Hòa + Ninh Thuận",
+        "cost": 300,
+        "rent": 260
+      },
+      {
+        "level": 2,
+        "name": "Vịnh Vân Phong",
+        "cost": 260,
+        "rent": 475
+      },
+      {
+        "level": 3,
+        "name": "Vịnh Vĩnh Hy",
+        "cost": 260,
+        "rent": 1075
+      },
+      {
+        "level": 4,
+        "name": "Tháp Bà Ponagar",
+        "cost": 260,
+        "rent": 1505
+      },
+      {
+        "level": 5,
+        "name": "Biển Nha Trang",
+        "cost": 280,
+        "rent": 2150
+      }
     ]
   },
   {
-    "tileIndex": 36,
-    "id": 27,
+    "id": 39,
     "name": "Đắk Lắk",
     "type": "property",
     "group": "blue",
@@ -1095,8 +1109,7 @@
     ]
   },
   {
-    "tileIndex": 37,
-    "id": 26,
+    "id": 40,
     "name": "Gia Lai",
     "type": "property",
     "group": "blue",
@@ -1137,22 +1150,7 @@
     ]
   },
   {
-    "tileIndex": 38,
-    "id": 40,
-    "name": "Điểm Cực Bắc",
-    "type": "utility",
-    "price": 300,
-    "mortgageValue": 150,
-    "diceMultipliers": [
-      10,
-      20,
-      35,
-      50
-    ]
-  },
-  {
-    "tileIndex": 39,
-    "id": 25,
+    "id": 41,
     "name": "Lâm Đồng",
     "type": "property",
     "group": "blue",
@@ -1193,98 +1191,20 @@
     ]
   },
   {
-    "tileIndex": 40,
-    "id": "chance_40",
-    "name": "Cơ Hội",
-    "type": "chance"
-  },
-  {
-    "tileIndex": 41,
-    "id": 30,
-    "name": "TP. Hồ Chí Minh",
-    "type": "property",
-    "group": "magenta",
-    "price": 340,
-    "mortgageValue": 170,
-    "baseRent": 20,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Bình Dương + TP. Hồ Chí Minh + Bà Rịa - Vũng Tàu",
-        "cost": 240,
-        "rent": 240
-      },
-      {
-        "level": 2,
-        "name": "Bãi biển Vũng Tàu",
-        "cost": 200,
-        "rent": 375
-      },
-      {
-        "level": 3,
-        "name": "Nhà tù Côn Đảo",
-        "cost": 200,
-        "rent": 850
-      },
-      {
-        "level": 4,
-        "name": "Địa đạo Củ Chi",
-        "cost": 200,
-        "rent": 1190
-      },
-      {
-        "level": 5,
-        "name": "Chợ Bến Thành",
-        "cost": 220,
-        "rent": 1700
-      }
+    "id": 42,
+    "name": "Điểm cực Nam",
+    "type": "utility",
+    "price": 300,
+    "mortgageValue": 150,
+    "diceMultipliers": [
+      10,
+      20,
+      35,
+      50
     ]
   },
   {
-    "tileIndex": 43,
-    "id": 24,
-    "name": "Tây Ninh",
-    "type": "property",
-    "group": "magenta",
-    "price": 430,
-    "mortgageValue": 215,
-    "baseRent": 25,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Long An + Tây Ninh",
-        "cost": 300,
-        "rent": 260
-      },
-      {
-        "level": 2,
-        "name": "Hồ Dầu Tiếng",
-        "cost": 260,
-        "rent": 475
-      },
-      {
-        "level": 3,
-        "name": "Khu di tích lịch sử Bình Thành",
-        "cost": 260,
-        "rent": 1075
-      },
-      {
-        "level": 4,
-        "name": "Vườn quốc gia Lò Gò - Xa Mát",
-        "cost": 260,
-        "rent": 1505
-      },
-      {
-        "level": 5,
-        "name": "Núi Bà Đen",
-        "cost": 280,
-        "rent": 2150
-      }
-    ]
-  },
-  {
-    "tileIndex": 44,
-    "id": 28,
+    "id": 43,
     "name": "Đồng Nai",
     "type": "property",
     "group": "magenta",
@@ -1325,181 +1245,99 @@
     ]
   },
   {
-    "tileIndex": 44,
-    "id": "chance_45",
-    "name": "Cơ Hội",
-    "type": "chance"
-  },
-  {
-    "tileIndex": 46,
-    "id": 31,
-    "name": "An Giang",
+    "id": 44,
+    "name": "Tây Ninh",
     "type": "property",
-    "group": "purple",
-    "price": 490,
-    "mortgageValue": 245,
-    "baseRent": 30,
-    "upgrades": [
-      {
-        "level": 1,
-        "name": "Kiên Giang + An Giang",
-        "cost": 340,
-        "rent": 295
-      },
-      {
-        "level": 2,
-        "name": "Rừng tràm Trà Sư",
-        "cost": 290,
-        "rent": 540
-      },
-      {
-        "level": 3,
-        "name": "Chợ nổi Long Xuyên",
-        "cost": 290,
-        "rent": 1225
-      },
-      {
-        "level": 4,
-        "name": "Khu di tích văn hóa Óc Eo",
-        "cost": 290,
-        "rent": 1715
-      },
-      {
-        "level": 5,
-        "name": "Đảo Phú Quốc",
-        "cost": 320,
-        "rent": 2450
-      }
-    ]
-  },
-  {
-    "tileIndex": 46,
-    "id": "go_to_jail",
-    "name": "Vào Tù",
-    "type": "go_to_jail"
-  },
-  {
-    "tileIndex": 47,
-    "id": 42,
-    "name": "Điểm Cực Đông",
-    "type": "utility",
-    "price": 300,
-    "mortgageValue": 150,
-    "diceMultipliers": [
-      10,
-      20,
-      35,
-      50
-    ]
-  },
-  {
-    "tileIndex": 48,
-    "id": 32,
-    "name": "Cà Mau",
-    "type": "property",
-    "group": "purple",
-    "price": 400,
-    "mortgageValue": 200,
+    "group": "magenta",
+    "price": 430,
+    "mortgageValue": 215,
     "baseRent": 25,
     "upgrades": [
       {
         "level": 1,
-        "name": "Bạc Liêu + Cà Mau",
-        "cost": 280,
-        "rent": 240
+        "name": "Long An + Tây Ninh",
+        "cost": 300,
+        "rent": 260
       },
       {
         "level": 2,
-        "name": "Hòn Đá Bạc",
-        "cost": 240,
-        "rent": 440
+        "name": "Hồ Dầu Tiếng",
+        "cost": 260,
+        "rent": 475
       },
       {
         "level": 3,
-        "name": "Chùa Xiêm Cán",
-        "cost": 240,
-        "rent": 1000
+        "name": "Khu di tích lịch sử Bình Thành",
+        "cost": 260,
+        "rent": 1075
       },
       {
         "level": 4,
-        "name": "Vườn quốc gia U Minh Hạ",
-        "cost": 240,
-        "rent": 1400
+        "name": "Vườn quốc gia Lò Gò - Xa Mát",
+        "cost": 260,
+        "rent": 1505
       },
       {
         "level": 5,
-        "name": "Mũi Cà Mau",
-        "cost": 260,
-        "rent": 2000
+        "name": "Núi Bà Đen",
+        "cost": 280,
+        "rent": 2150
       }
     ]
   },
   {
-    "tileIndex": 49,
-    "id": 38,
-    "name": "Sân bay quốc tế Cam Ranh",
-    "type": "airport",
-    "price": 500,
-    "mortgageValue": 250,
-    "baseRent": 70,
-    "rentByCount": [
-      70,
-      150,
-      350,
-      500
-    ]
-  },
-  {
-    "tileIndex": 50,
-    "id": 33,
-    "name": "TP. Cần Thơ",
+    "id": 45,
+    "name": "TP. Hồ Chí Minh",
     "type": "property",
-    "group": "purple",
-    "price": 320,
-    "mortgageValue": 160,
+    "group": "magenta",
+    "price": 340,
+    "mortgageValue": 170,
     "baseRent": 20,
     "upgrades": [
       {
         "level": 1,
-        "name": "Sóc Trăng + Hậu Giang + TP. Cần Thơ",
-        "cost": 220,
-        "rent": 225
+        "name": "Bình Dương + TP. Hồ Chí Minh + Bà Rịa - Vũng Tàu",
+        "cost": 240,
+        "rent": 240
       },
       {
         "level": 2,
-        "name": "Bến Ninh Kiều",
-        "cost": 190,
-        "rent": 350
+        "name": "Bãi biển Vũng Tàu",
+        "cost": 200,
+        "rent": 375
       },
       {
         "level": 3,
-        "name": "Chùa Dơi",
-        "cost": 190,
-        "rent": 800
+        "name": "Nhà tù Côn Đảo",
+        "cost": 200,
+        "rent": 850
       },
       {
         "level": 4,
-        "name": "Nhà cổ Bình Thủy",
-        "cost": 190,
-        "rent": 1120
+        "name": "Địa đạo Củ Chi",
+        "cost": 200,
+        "rent": 1190
       },
       {
         "level": 5,
-        "name": "Chợ nổi Cái Răng",
-        "cost": 210,
-        "rent": 1600
+        "name": "Chợ Bến Thành",
+        "cost": 220,
+        "rent": 1700
       }
     ]
   },
   {
-    "tileIndex": 51,
-    "id": "chest_51",
+    "id": 46,
+    "name": "Vào Tù",
+    "type": "go_to_jail"
+  },
+  {
+    "id": 47,
     "name": "Khí Vận",
     "type": "chest"
   },
   {
-    "tileIndex": 52,
-    "id": 29,
+    "id": 48,
     "name": "Vĩnh Long",
     "type": "property",
     "group": "purple",
@@ -1540,8 +1378,7 @@
     ]
   },
   {
-    "tileIndex": 53,
-    "id": 34,
+    "id": 49,
     "name": "Đồng Tháp",
     "type": "property",
     "group": "purple",
@@ -1582,52 +1419,158 @@
     ]
   },
   {
-    "tileIndex": 54,
-    "id": "tax_54",
-    "name": "Ngân hàng nhà nước",
-    "type": "tax",
-    "amount": 1000
+    "id": 50,
+    "name": "Sân bay Tân Sơn Nhất",
+    "type": "airport",
+    "price": 500,
+    "mortgageValue": 250,
+    "baseRent": 70,
+    "rentByCount": [
+      70,
+      150,
+      350,
+      500
+    ]
   },
   {
-    "tileIndex": 55,
-    "id": 5,
-    "name": "Phú Thọ",
+    "id": 51,
+    "name": "TP. Cần Thơ",
     "type": "property",
-    "group": "green",
-    "price": 470,
-    "mortgageValue": 235,
+    "group": "purple",
+    "price": 320,
+    "mortgageValue": 160,
+    "baseRent": 20,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Sóc Trăng + Hậu Giang + TP. Cần Thơ",
+        "cost": 220,
+        "rent": 225
+      },
+      {
+        "level": 2,
+        "name": "Bến Ninh Kiều",
+        "cost": 190,
+        "rent": 350
+      },
+      {
+        "level": 3,
+        "name": "Chùa Dơi",
+        "cost": 190,
+        "rent": 800
+      },
+      {
+        "level": 4,
+        "name": "Nhà cổ Bình Thủy",
+        "cost": 190,
+        "rent": 1120
+      },
+      {
+        "level": 5,
+        "name": "Chợ nổi Cái Răng",
+        "cost": 210,
+        "rent": 1600
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "An Giang",
+    "type": "property",
+    "group": "purple",
+    "price": 490,
+    "mortgageValue": 245,
     "baseRent": 30,
     "upgrades": [
       {
         "level": 1,
-        "name": "Hòa Bình + Vĩnh Phúc + Phú Thọ",
-        "cost": 330,
-        "rent": 330
+        "name": "Kiên Giang + An Giang",
+        "cost": 340,
+        "rent": 295
       },
       {
         "level": 2,
-        "name": "Thung lũng văn hóa Mai Châu",
-        "cost": 280,
-        "rent": 515
+        "name": "Rừng tràm Trà Sư",
+        "cost": 290,
+        "rent": 540
       },
       {
         "level": 3,
-        "name": "Tam Đảo",
-        "cost": 280,
-        "rent": 1175
+        "name": "Chợ nổi Long Xuyên",
+        "cost": 290,
+        "rent": 1225
       },
       {
         "level": 4,
-        "name": "Hồ Thủy điện Hòa Bình",
-        "cost": 280,
-        "rent": 1645
+        "name": "Khu di tích văn hóa Óc Eo",
+        "cost": 290,
+        "rent": 1715
       },
       {
         "level": 5,
-        "name": "Đền Hùng",
-        "cost": 310,
-        "rent": 2350
+        "name": "Đảo Phú Quốc",
+        "cost": 320,
+        "rent": 2450
       }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Cơ Hội",
+    "type": "chance"
+  },
+  {
+    "id": 54,
+    "name": "Cà Mau",
+    "type": "property",
+    "group": "purple",
+    "price": 400,
+    "mortgageValue": 200,
+    "baseRent": 25,
+    "upgrades": [
+      {
+        "level": 1,
+        "name": "Bạc Liêu + Cà Mau",
+        "cost": 280,
+        "rent": 240
+      },
+      {
+        "level": 2,
+        "name": "Hòn Đá Bạc",
+        "cost": 240,
+        "rent": 440
+      },
+      {
+        "level": 3,
+        "name": "Chùa Xiêm Cán",
+        "cost": 240,
+        "rent": 1000
+      },
+      {
+        "level": 4,
+        "name": "Vườn quốc gia U Minh Hạ",
+        "cost": 240,
+        "rent": 1400
+      },
+      {
+        "level": 5,
+        "name": "Mũi Cà Mau",
+        "cost": 260,
+        "rent": 2000
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Điểm cực Tây",
+    "type": "utility",
+    "price": 300,
+    "mortgageValue": 150,
+    "diceMultipliers": [
+      10,
+      20,
+      35,
+      50
     ]
   }
 ]

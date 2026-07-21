@@ -25,21 +25,23 @@ function CameraController({ controlsRef }) {
     if (targetTileId !== null && targetTileId >= 0) {
       // Zoom cận cảnh ô đất góc nghiêng ~45 độ (Cinematic Monopoly Plus)
       const coords = getTileCoordinates(targetTileId);
-      const camOffsetX = coords.x >= 0 ? 6.5 : -6.5;
-      const camOffsetZ = coords.z >= 0 ? 8.5 : -8.5;
+      const posX = coords.x ?? coords.position[0];
+      const posZ = coords.z ?? coords.position[2];
+      const camOffsetX = posX >= 0 ? 6.5 : -6.5;
+      const camOffsetZ = posZ >= 0 ? 8.5 : -8.5;
 
       gsap.to(camera.position, {
-        x: coords.x + camOffsetX,
+        x: posX + camOffsetX,
         y: 8.0, // Độ cao ~8 đơn vị, góc nhìn nghiêng xuống 45 độ cực kỳ sinh động
-        z: coords.z + camOffsetZ,
+        z: posZ + camOffsetZ,
         duration: 1.3,
         ease: 'power3.inOut'
       });
 
       gsap.to(controlsRef.current.target, {
-        x: coords.x,
+        x: posX,
         y: 0.6,
-        z: coords.z,
+        z: posZ,
         duration: 1.3,
         ease: 'power3.inOut'
       });

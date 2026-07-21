@@ -38,9 +38,12 @@ export function PlayerToken({ player, index, totalPlayers }) {
     const offsetX = Math.cos(angle) * 0.22;
     const offsetZ = Math.sin(angle) * 0.22;
 
-    const targetX = targetCoords.x + offsetX;
-    const targetZ = targetCoords.z + offsetZ;
-    const targetY = targetCoords.y + targetCoords.size[1] / 2 + 0.4; // Nằm sát mặt trên của ô đất
+    const posX = targetCoords.x ?? targetCoords.position[0];
+    const posY = targetCoords.y ?? targetCoords.position[1];
+    const posZ = targetCoords.z ?? targetCoords.position[2];
+    const targetX = posX + offsetX;
+    const targetZ = posZ + offsetZ;
+    const targetY = posY + targetCoords.size[1] / 2 + 0.4; // Nằm sát mặt trên của ô đất
 
     // Dùng GSAP tạo hiệu ứng nhảy lên và lướt mượt mà đến vị trí mới
     gsap.to(meshRef.current.position, {

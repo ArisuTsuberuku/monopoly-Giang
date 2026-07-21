@@ -3,78 +3,46 @@ import { useGameStore } from '../store/gameStore';
 import { Text } from '@react-three/drei';
 import TilePreset from './TilePreset';
 
+export const TILE_W = 1.0;
+export const TILE_H = 1.6;
+export const CORNER_SIZE = 2.0;
+
 /**
- * Thuật toán Toán học Ma trận (Grid Math):
- * Chuyển đổi chỉ số mảng 1 chiều (0-55) thành tọa độ 3D (X, Y=0, Z)
- * Viền quanh hình chữ nhật tỷ lệ 16:9 với cạnh ngang 19 ô (17 lõi + 2 góc) và cạnh dọc 11 ô (9 lõi + 2 góc).
- * 
- * Các góc cố định tại chỉ số:
- * - Góc 1 (Khởi Hành): id = 0 -> (X = +18.5, Z = +10.5)
- * - Góc 2 (Góc Dưới Trái): id = 18 -> (X = -18.5, Z = +10.5)
- * - Góc 3 (Bãi Đỗ Xe): id = 28 -> (X = -18.5, Z = -10.5)
- * - Góc 4 (Góc Trên Phải): id = 46 -> (X = +18.5, Z = -10.5)
+ * Thuật toán Toán học Ma trận (Grid Math - Flush Outer Edges):
+ * Chuyển đổi chỉ số mảng 1 chiều (0-55) thành tọa độ 3D (X, Y=0, Z), góc xoay khối 3D (rotation) và góc xoay nhãn chữ (textRotation).
+ * Mép ngoài của TẤT CẢ các ô (cả ô góc và ô thường) thẳng hàng với nhau tại X = ±10.5 và Z = ±6.5.
+ * Các ô góc nhô lẹm sâu vào phía trong lõi bàn cờ (kích thước 2.0 x 0.4 x 2.0, rotation: [0, 0, 0]).
  */
-export function getTileCoordinates(index) {
-  const i = Number(index) || 0;
+export function getTileCoordinates(index, tileId) {
+  const sizeNormal = [1.0, 0.4, 1.6];
+  const sizeCorner = [2.0, 0.4, 2.0];
 
-  // Góc 0: Khởi Hành (Top-Left Corner) -> (-9.3, 0, -5.3), xoay -Math.PI*3/4
-  if (i === 0) {
-    return { x: -9.3, y: 0, z: -5.3, position: [-9.3, 0, -5.3], size: [1.6, 0.4, 1.6], rotation: [0, -Math.PI * 3 / 4, 0] };
-  }
-  // Cạnh trên (Top Edge): từ i = 1 đến 17 (rotation: [0, Math.PI, 0] - Chữ hướng ra Top)
-  if (i >= 1 && i <= 17) {
-    const x = -8.0 + (i - 1) * 1.0;
-    return {
-      x, y: 0, z: -5.3,
-      position: [x, 0, -5.3],
-      size: [1.0, 0.4, 1.6],
-      rotation: [0, Math.PI, 0]
-    };
-  }
-  // Góc 18: Góc Trên Phải (Top-Right Corner) -> (9.3, 0, -5.3), xoay Math.PI*3/4
-  if (i === 18) {
-    return { x: 9.3, y: 0, z: -5.3, position: [9.3, 0, -5.3], size: [1.6, 0.4, 1.6], rotation: [0, Math.PI * 3 / 4, 0] };
-  }
-  // Cạnh phải (Right Edge): từ i = 19 đến 27 (rotation: [0, -Math.PI / 2, 0] - Chữ hướng ra Right)
-  if (i >= 19 && i <= 27) {
-    const z = -4.0 + (i - 19) * 1.0;
-    return {
-      x: 9.3, y: 0, z,
-      position: [9.3, 0, z],
-      size: [1.0, 0.4, 1.6],
-      rotation: [0, -Math.PI / 2, 0]
-    };
-  }
-  // Góc 28: Góc Dưới Phải / Bãi Đỗ Xe (Bottom-Right Corner) -> (9.3, 0, 5.3), xoay Math.PI/4
-  if (i === 28) {
-    return { x: 9.3, y: 0, z: 5.3, position: [9.3, 0, 5.3], size: [1.6, 0.4, 1.6], rotation: [0, Math.PI / 4, 0] };
-  }
-  // Cạnh dưới (Bottom Edge): từ i = 29 đến 45 (rotation: [0, 0, 0] - Chữ hướng ra Bottom)
-  if (i >= 29 && i <= 45) {
-    const x = 8.0 - (i - 29) * 1.0;
-    return {
-      x, y: 0, z: 5.3,
-      position: [x, 0, 5.3],
-      size: [1.0, 0.4, 1.6],
-      rotation: [0, 0, 0]
-    };
-  }
-  // Góc 46: Góc Dưới Trái / Vào Tù (Bottom-Left Corner) -> (-9.3, 0, 5.3), xoay -Math.PI/4
-  if (i === 46) {
-    return { x: -9.3, y: 0, z: 5.3, position: [-9.3, 0, 5.3], size: [1.6, 0.4, 1.6], rotation: [0, -Math.PI / 4, 0] };
-  }
-  // Cạnh trái (Left Edge): từ i = 47 đến 55 (rotation: [0, Math.PI / 2, 0] - Chữ hướng ra Left)
-  if (i >= 47 && i <= 55) {
-    const z = 4.0 - (i - 47) * 1.0;
-    return {
-      x: -9.3, y: 0, z,
-      position: [-9.3, 0, z],
-      size: [1.0, 0.4, 1.6],
-      rotation: [0, Math.PI / 2, 0]
-    };
-  }
+  // 1. Góc Trái-Trên (Top-Left)
+  if (index === 0) return { position: [-9.5, 0, -5.5], rotation: [0, 0, 0], size: sizeCorner, textRotation: [-Math.PI / 2, 0, -Math.PI * 3 / 4] };
+  
+  // 2. Cạnh Trên (Top Edge: index 1 -> 17)
+  if (index >= 1 && index <= 17) return { position: [-8.0 + (index - 1) * 1.0, 0, -5.7], rotation: [0, Math.PI, 0], size: sizeNormal, textRotation: [-Math.PI / 2, 0, Math.PI] };
+  
+  // 3. Góc Phải-Trên (Top-Right)
+  if (index === 18) return { position: [9.5, 0, -5.5], rotation: [0, 0, 0], size: sizeCorner, textRotation: [-Math.PI / 2, 0, Math.PI * 3 / 4] };
+  
+  // 4. Cạnh Phải (Right Edge: index 19 -> 27)
+  if (index >= 19 && index <= 27) return { position: [9.7, 0, -4.0 + (index - 19) * 1.0], rotation: [0, -Math.PI / 2, 0], size: sizeNormal, textRotation: [-Math.PI / 2, 0, -Math.PI / 2] };
+  
+  // 5. Góc Phải-Dưới (Bottom-Right)
+  if (index === 28) return { position: [9.5, 0, 5.5], rotation: [0, 0, 0], size: sizeCorner, textRotation: [-Math.PI / 2, 0, Math.PI / 4] };
+  
+  // 6. Cạnh Dưới (Bottom Edge: index 29 -> 45)
+  if (index >= 29 && index <= 45) return { position: [8.0 - (index - 29) * 1.0, 0, 5.7], rotation: [0, 0, 0], size: sizeNormal, textRotation: [-Math.PI / 2, 0, 0] };
+  
+  // 7. Góc Trái-Dưới (Bottom-Left)
+  if (index === 46) return { position: [-9.5, 0, 5.5], rotation: [0, 0, 0], size: sizeCorner, textRotation: [-Math.PI / 2, 0, -Math.PI / 4] };
+  
+  // 8. Cạnh Trái (Left Edge: index 47 -> 55)
+  if (index >= 47 && index <= 55) return { position: [-9.7, 0, 4.0 - (index - 47) * 1.0], rotation: [0, Math.PI / 2, 0], size: sizeNormal, textRotation: [-Math.PI / 2, 0, Math.PI / 2] };
 
-  return { x: 0, y: 0, z: 0, position: [0, 0, 0], size: [1.0, 0.4, 1.6], rotation: [0, 0, 0] };
+  // Fallback an toàn
+  return { position: [0, 0, 0], rotation: [0, 0, 0], size: sizeNormal, textRotation: [-Math.PI / 2, 0, 0] };
 }
 
 /**
@@ -150,21 +118,21 @@ export default function Board() {
       })}
 
       {/* --- WOODEN BOARD (MẶT BÀN GỖ NÂU ẤM TRUNG TÂM LƯỚI 17x9) --- */}
-      {/* Khối mặt bàn gỗ chuẩn kích thước theo yêu cầu: args={[17, 0.2, 9]} */}
-      <mesh position={[0, -0.05, 0]} receiveShadow castShadow>
-        <boxGeometry args={[17, 0.2, 9]} />
+      {/* Khối mặt bàn gỗ chuẩn kích thước theo yêu cầu: args={[17.8, 0.2, 9.8]} */}
+      <mesh position={[0, -0.1, 0]} receiveShadow castShadow>
+        <boxGeometry args={[17.8, 0.2, 9.8]} />
         <meshStandardMaterial color="#8b5a2b" roughness={0.9} metalness={0.08} />
       </mesh>
 
       {/* Sân nỉ Diorama sáng sang trọng nằm trên mặt gỗ trung tâm */}
       <mesh position={[0, 0.06, 0]} receiveShadow>
-        <boxGeometry args={[16.6, 0.02, 8.6]} />
+        <boxGeometry args={[17.4, 0.02, 9.4]} />
         <meshStandardMaterial color="#f8fafc" roughness={0.65} metalness={0.05} />
       </mesh>
       
       {/* Khối đế gỗ Diorama bên dưới toàn bộ bàn cờ giúp tạo độ cao sang trọng */}
       <mesh position={[0, -0.35, 0]} receiveShadow>
-        <boxGeometry args={[20.6, 0.35, 12.6]} />
+        <boxGeometry args={[21.4, 0.35, 13.4]} />
         <meshStandardMaterial color="#6b4423" roughness={0.85} metalness={0.1} />
       </mesh>
 

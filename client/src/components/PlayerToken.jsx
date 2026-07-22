@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { getTileCoordinates } from './Board';
+import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import { useSpring, a } from '@react-spring/three';
 
@@ -49,13 +50,22 @@ export function PlayerToken({ player, index, totalPlayers }) {
   const myPlayerId = useGameStore((state) => state.myPlayerId);
   const currentTurnPlayerId = useGameStore((state) => state.currentTurnPlayerId);
   const setTokenAnimating = useGameStore((state) => state.setTokenAnimating);
+  const setCameraFocusPos = useGameStore((state) => state.setCameraFocusPos);
 
   const isMe = player.id === myPlayerId;
   const isMyTurn = player.id === currentTurnPlayerId;
+  const isCurrentTurn = isMyTurn;
   const color = TOKEN_COLORS[index % TOKEN_COLORS.length];
 
+  const groupRef = useRef();
   const prevPosition = usePrevious(player.position);
   const initialPos = getOffsetTargetPos(player.position, index, totalPlayers);
+
+  useFrame(() => {
+    if (isCurrentTurn && groupRef.current) {
+      setCameraFocusPos([groupRef.current.position.x, groupRef.current.position.y, groupRef.current.position.z]);
+    }
+  });
 
   // Khởi tạo Spring động cho phép lập trình chuỗi nhảy (Async Queue)
   const [{ pos }, api] = useSpring(() => ({
@@ -99,7 +109,7 @@ export function PlayerToken({ player, index, totalPlayers }) {
   }, [player.position, prevPosition, index, totalPlayers, api, setTokenAnimating]);
 
   return (
-    <a.group position={pos}>
+    <a.group ref={groupRef} position={pos}>
       {/* Thu nhỏ toàn bộ model 3D xuống còn ~35% (scale={[0.35, 0.35, 0.35]}) để vừa vặn lọt thỏm trong ô đất */}
       <group scale={[0.35, 0.35, 0.35]}>
         {/* Khối trụ đại diện Token người chơi (CylinderGeometry) */}
@@ -130,23 +140,10 @@ export function PlayerToken({ player, index, totalPlayers }) {
       </group>
 
       {/* Bảng tên HTML floating nhô phía trên Token (đặt ở ngoài group scale để giữ độ sắc nét nhãn chữ) */}
-      <Html position={[0, 0.9, 0]} center distanceFactor={18}>
-        <div
-          style={{
-            background: isMe ? 'rgba(6, 182, 212, 0.95)' : 'rgba(15, 23, 42, 0.9)',
-            color: '#ffffff',
-            padding: '2px 8px',
-            borderRadius: '6px',
-            fontSize: '11px',
-            fontWeight: 'bold',
-            whiteSpace: 'nowrap',
-            border: isMyTurn ? `2px solid ${color}` : '1px solid rgba(255,255,255,0.25)',
-            boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
-            pointerEvents: 'none'
-          }}
-        >
-          {player.name} {isMe && '⭐'}
-          {player.inJail && ' 🚨'}
+      <Html transform position={[0, 2.5, 0]} scale={0.6} center zIndexRange={[100, 0]}>
+        <div className="px-3 py-1 rounded-full bg-slate-900/80 text-white font-bold text-sm border border-white/30 shadow-lg pointer-events-none whitespace-nowrap">
+          {player.name} {isCurrentTurn ? '⭐' : ''}
+          {player.inJail ? ' 🚨' : ''}
         </div>
       </Html>
     </a.group>

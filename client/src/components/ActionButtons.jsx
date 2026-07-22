@@ -1,9 +1,10 @@
 import React from 'react';
 import { useGameStore } from '../store/gameStore';
-import { Play, Dices, SkipForward, AlertCircle, X, RotateCcw } from 'lucide-react';
+import { Dices, SkipForward, AlertCircle, X, RotateCcw } from 'lucide-react';
 
 /**
- * Component hiển thị các nút hành động (Start, Roll Dice, End Turn) và thông báo lỗi từ server
+ * Component hiển thị nút điều khiển HUD Floating (Góc phải dưới)
+ * Giai đoạn 27: Monopoly Plus style giant floating action buttons
  */
 export default function ActionButtons() {
   const status = useGameStore((state) => state.status);
@@ -13,113 +14,68 @@ export default function ActionButtons() {
   const errorMessage = useGameStore((state) => state.errorMessage);
   const players = useGameStore((state) => state.players);
 
-  const startGame = useGameStore((state) => state.startGame);
   const rollDice = useGameStore((state) => state.rollDice);
   const endTurn = useGameStore((state) => state.endTurn);
   const resetGame = useGameStore((state) => state.resetGame);
   const clearError = useGameStore((state) => state.clearError);
 
   const currentTurnPlayer = players.find((p) => p.id === currentTurnPlayerId);
-  // Cho phép điều khiển nếu là lượt của chính mình, lượt của local player, hoặc bất kỳ người chơi thật nào trên cùng máy Host
   const isMyTurn = Boolean(
     currentTurnPlayerId &&
-    (currentTurnPlayerId === myPlayerId ||
-     (typeof currentTurnPlayerId === 'string' && currentTurnPlayerId.startsWith(`local_${myPlayerId}`)) ||
-     (currentTurnPlayer && !currentTurnPlayer.isBot && players.some(p => p.id === myPlayerId)))
+      (currentTurnPlayerId === myPlayerId ||
+        (typeof currentTurnPlayerId === 'string' && currentTurnPlayerId.startsWith(`local_${myPlayerId}`)) ||
+        (currentTurnPlayer && !currentTurnPlayer.isBot && players.some((p) => p.id === myPlayerId)))
   );
-  const isJoined = players.some((p) => p.id === myPlayerId || (typeof p.id === 'string' && p.id.startsWith(`local_${myPlayerId}`)));
 
   return (
-    <div className="card action-buttons-card">
-      <div className="card-header">
-        <Dices className="icon-main" />
-        <h2>Bảng Hành Động (Control Panel)</h2>
-      </div>
-
+    <div className="flex flex-col items-end gap-3">
+      {/* Thông báo lỗi nếu có */}
       {errorMessage && (
-        <div className="error-alert">
-          <AlertCircle size={18} className="error-icon" />
-          <span className="error-text">{errorMessage}</span>
-          <button className="close-error-btn" onClick={clearError} title="Đóng thông báo">
-            <X size={16} />
+        <div className="bg-red-600/90 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-xl border border-white/30 flex items-center gap-3 max-w-sm">
+          <AlertCircle size={18} className="shrink-0 animate-bounce" />
+          <span className="text-xs font-semibold">{errorMessage}</span>
+          <button onClick={clearError} className="hover:bg-white/20 p-1 rounded transition-colors">
+            <X size={14} />
           </button>
         </div>
       )}
 
-      <div className="buttons-grid">
-        {status === 'waiting' && (
-          <button
-            className="btn btn-primary btn-start"
-            onClick={startGame}
-            disabled={!isJoined || players.length === 0}
-          >
-            <Play size={18} />
-            <span>Bắt đầu Game</span>
-          </button>
-        )}
+      {/* Trạng thái lượt đi */}
+      {!isMyTurn && (
+        <div className="bg-black/60 backdrop-blur-md text-gray-200 px-4 py-2 rounded-xl border border-white/10 text-sm font-medium shadow-md">
+          👀 Đang chờ lượt của <span className="font-bold text-yellow-400">{currentTurnPlayer?.name || 'đối thủ'}</span>...
+        </div>
+      )}
 
-        {status === 'started' && (
-          <>
-            <button
-              className={`btn btn-roll ${isMyTurn && !hasRolledThisTurn ? 'btn-pulse' : ''}`}
-              onClick={rollDice}
-              disabled={!isMyTurn || hasRolledThisTurn}
-            >
-              <Dices size={20} />
-              <span>Đổ Xúc Xắc</span>
-            </button>
+      {/* Nút ĐỔ XÚC XẮC khổng lồ hoặc KẾT THÚC LƯỢT */}
+      {isMyTurn && !hasRolledThisTurn && (
+        <button
+          onClick={rollDice}
+          className="px-8 py-4 bg-gradient-to-r from-red-600 to-orange-500 text-white font-black text-xl rounded-full shadow-[0_5px_20px_rgba(239,68,68,0.5)] hover:scale-105 active:scale-95 transition-all animate-pulse border-2 border-white/50 cursor-pointer"
+        >
+          🎲 ĐỔ XÚC XẮC
+        </button>
+      )}
 
-            <button
-              className="btn btn-secondary btn-end-turn"
-              onClick={endTurn}
-              disabled={!isMyTurn || !hasRolledThisTurn}
-            >
-              <SkipForward size={18} />
-              <span>Kết thúc Lượt</span>
-            </button>
+      {isMyTurn && hasRolledThisTurn && (
+        <button
+          onClick={endTurn}
+          className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-105 active:scale-95 transition-all duration-200 text-white font-bold text-lg px-6 py-4 rounded-xl shadow-lg flex items-center gap-2 border border-white/30 cursor-pointer"
+        >
+          <SkipForward size={22} />
+          <span>KẾT THÚC LƯỢT</span>
+        </button>
+      )}
 
-            <button
-              className="btn btn-danger btn-reset"
-              onClick={resetGame}
-              style={{
-                background: '#ef4444',
-                color: '#ffffff',
-                border: 'none',
-                padding: '0.65rem',
-                borderRadius: '8px',
-                fontWeight: 600,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                cursor: 'pointer',
-                marginTop: '0.5rem',
-                gridColumn: '1 / -1',
-                boxShadow: '0 2px 4px rgba(239, 68, 68, 0.25)'
-              }}
-              title="Làm mới lại toàn bộ ván cờ về màn hình chờ Lobby"
-            >
-              <RotateCcw size={18} />
-              <span>Làm mới Ván cờ</span>
-            </button>
-          </>
-        )}
-      </div>
-
-      <div className="action-hint">
-        {status === 'waiting' && (
-          <p>⏳ Đang chờ người chơi gia nhập phòng cờ. Nhấn "Bắt đầu Game" để khởi tranh.</p>
-        )}
-        {status === 'started' && !isMyTurn && (
-          <p>👀 Đang chờ lượt đi của người chơi khác...</p>
-        )}
-        {status === 'started' && isMyTurn && !hasRolledThisTurn && (
-          <p className="hint-active">👉 Đến lượt của bạn! Nhấn "Đổ Xúc Xắc" để di chuyển.</p>
-        )}
-        {status === 'started' && isMyTurn && hasRolledThisTurn && (
-          <p className="hint-active">👉 Bạn đã đổ xúc xắc. Hãy mua đất hoặc nhấn "Kết thúc Lượt".</p>
-        )}
-      </div>
+      {/* Nút làm mới ván cờ (nhỏ gọn phía dưới) */}
+      <button
+        onClick={resetGame}
+        className="bg-black/40 hover:bg-red-600/80 backdrop-blur-sm text-gray-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/30 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm mt-1"
+        title="Làm mới lại toàn bộ ván cờ về màn hình chờ Lobby"
+      >
+        <RotateCcw size={13} />
+        <span>Làm mới ván cờ</span>
+      </button>
     </div>
   );
 }

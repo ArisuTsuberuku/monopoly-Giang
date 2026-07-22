@@ -17,6 +17,8 @@ export const useGameStore = create((set, get) => ({
   isConnected: false,
   myPlayerId: null,
   status: 'waiting', // 'waiting' | 'started'
+  gameStatus: 'waiting', // 'waiting' | 'playing'
+  hasJoined: false,
   players: [],
   properties: {},
   board: [],
@@ -29,6 +31,8 @@ export const useGameStore = create((set, get) => ({
   targetPlayerCount: 4, // Số lượng người chơi mục tiêu trong phòng (2, 3, 4 - tự động điền Bot nếu thiếu)
   isTokenAnimating: false,
   setTokenAnimating: (status) => set({ isTokenAnimating: status }),
+  cameraFocusPos: [0, 0, 0],
+  setCameraFocusPos: (pos) => set({ cameraFocusPos: pos }),
 
   /**
    * Cập nhật số lượng người chơi mong muốn trong phòng (2, 3, 4)
@@ -46,7 +50,14 @@ export const useGameStore = create((set, get) => ({
     }
     if (socketInstance && listenersAttached) {
       if (!get().socket) {
-        set({ socket: socketInstance, isConnected: socketInstance.connected, myPlayerId: socketInstance.id });
+        const nextHasJoined = get().players.some((p) => p.id === socketInstance.id || (typeof p.id === 'string' && p.id.startsWith(`local_${socketInstance.id}`)));
+        set({
+          socket: socketInstance,
+          isConnected: socketInstance.connected,
+          myPlayerId: socketInstance.id,
+          hasJoined: nextHasJoined,
+          gameStatus: get().status === 'started' ? 'playing' : 'waiting'
+        });
       }
       return;
     }
@@ -62,12 +73,29 @@ export const useGameStore = create((set, get) => ({
 
       socket.on('connect', () => {
         console.log(`[Socket Connected] Kết nối máy chủ thành công! ID: ${socket.id}`);
-        set({ socket, isConnected: true, myPlayerId: socket.id });
+        const currentState = get();
+        const nextHasJoined = currentState.players.some((p) => p.id === socket.id || (typeof p.id === 'string' && p.id.startsWith(`local_${socket.id}`)));
+        set({
+          socket,
+          isConnected: true,
+          myPlayerId: socket.id,
+          hasJoined: nextHasJoined,
+          gameStatus: currentState.status === 'started' ? 'playing' : 'waiting'
+        });
       });
 
       socket.on('disconnect', () => {
         console.warn('[Socket Disconnected] Mất kết nối tới máy chủ.');
         set({ isConnected: false });
+      });
+
+      // Lắng nghe sự kiện tham gia hoặc bắt đầu ván chơi
+      socket.on('join_success', () => {
+        set({ hasJoined: true });
+      });
+
+      socket.on('start_game', () => {
+        set({ gameStatus: 'playing' });
       });
 
       // Lắng nghe cập nhật toàn bộ trạng thái ván cờ từ server
@@ -85,15 +113,23 @@ export const useGameStore = create((set, get) => ({
           }
         }
 
-        set({
-          status: payload.status || 'waiting',
-          players: payload.players || [],
+        const nextPlayers = payload.players || currentState.players || [];
+        const myId = currentState.myPlayerId || (socketInstance ? socketInstance.id : null);
+        const nextHasJoined = nextPlayers.some((p) => p.id === myId || (typeof p.id === 'string' && p.id.startsWith(`local_${myId}`)));
+
+        set((state) => ({
+          ...payload,
+          // Server thường gửi 'status', ta lưu nó vào cả status và gameStatus để tương thích
+          gameStatus: payload.status === 'started' ? 'playing' : (payload.status || payload.gameStatus || state.gameStatus),
+          status: payload.status || state.status,
+          hasJoined: payload.hasJoined !== undefined ? payload.hasJoined : (nextHasJoined !== undefined ? nextHasJoined : state.hasJoined),
+          players: nextPlayers,
           properties: payload.properties || {},
           board: payload.board || [],
           currentTurnPlayerId: payload.currentTurnPlayerId || null,
           hasRolledThisTurn: Boolean(payload.hasRolledThisTurn),
           isTokenAnimating: overrideAnimating
-        });
+        }));
       });
 
       // Lắng nghe sự kiện nhật ký ván cờ (Turn events)

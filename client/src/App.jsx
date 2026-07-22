@@ -3,88 +3,69 @@ import { useGameStore } from './store/gameStore';
 import JoinForm from './components/JoinForm';
 import PlayerList from './components/PlayerList';
 import ActionButtons from './components/ActionButtons';
-import LogPanel from './components/LogPanel';
 import Scene3D from './components/Scene3D';
 import PropertyCardModal from './components/PropertyCardModal';
-import { Radio, Wifi, WifiOff, Landmark } from 'lucide-react';
 import './App.css';
 
 /**
- * Giao diện chính App 3D Monopoly Xuyên Việt (Authoritative Server Client + WebGL R3F)
- * Giai đoạn 3: Light Theme Diorama & Cinematic Camera
+ * Giao diện chính App 3D Monopoly Xuyên Việt (Fullscreen fixed 3D + HUD Overlays)
+ * Giai đoạn 28: Fixed Root Layering & CSS Cleanups
  */
 export default function App() {
   const connectSocket = useGameStore((state) => state.connectSocket);
-  const isConnected = useGameStore((state) => state.isConnected);
-  const myPlayerId = useGameStore((state) => state.myPlayerId);
-  const status = useGameStore((state) => state.status);
-  const activePropertyModal = useGameStore((state) => state.activePropertyModal);
+  const hasJoined = useGameStore((state) => state.hasJoined);
+  const gameStatus = useGameStore((state) => state.gameStatus || state.status);
   const isTokenAnimating = useGameStore((state) => state.isTokenAnimating);
+  const activePropertyModal = useGameStore((state) => state.activePropertyModal);
 
   useEffect(() => {
     connectSocket();
   }, [connectSocket]);
 
+  // Debug log để kiểm tra state
+  console.log("HUD State - hasJoined:", hasJoined, " | gameStatus:", gameStatus, " | Animating:", isTokenAnimating);
+
   return (
-    <div className="app-container">
-      {/* --- HEADER --- */}
-      <header className="app-header">
-        <div className="header-brand">
-          <div className="logo-badge">
-            <Landmark className="logo-icon" size={28} />
-          </div>
-          <div>
-            <h1 className="brand-title">Monopoly Xuyên Việt 3D</h1>
-            <p className="brand-subtitle">Giai đoạn 23: Monopoly Plus Timing &amp; Radial Cinematic Camera</p>
-          </div>
-        </div>
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', overflow: 'hidden' }} className="select-none font-sans bg-gradient-to-b from-sky-400 to-sky-100">
 
-        <div className="header-status">
-          <div className={`status-badge ${isConnected ? 'status-connected' : 'status-disconnected'}`}>
-            {isConnected ? <Wifi size={16} /> : <WifiOff size={16} />}
-            <span>{isConnected ? 'Connected to Authoritative Server' : 'Disconnected (Port 3000)'}</span>
+      {/* LAYER 0: 3D CANVAS */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
+        <Scene3D />
+      </div>
+
+      {/* LAYER 1: HUD WIDGETS */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 10, pointerEvents: 'none' }}>
+
+        {/* MENU LOBBY (Bên Trái) */}
+        {(!hasJoined || gameStatus === 'waiting') && (
+          <div style={{ position: 'absolute', left: '3rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'auto', zIndex: 20 }}>
+             <JoinForm />
           </div>
-          {myPlayerId && (
-            <div className="player-id-badge">
-              <Radio size={14} />
-              <span>Socket ID: {myPlayerId.slice(0, 6)}...</span>
+        )}
+
+        {/* HUD TRONG GAME (4 Góc & Giữa) */}
+        {(hasJoined && (gameStatus === 'playing' || gameStatus === 'started')) && (
+          <>
+            {/* HUD 4 Góc */}
+            <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
+              <PlayerList />
             </div>
-          )}
-          <div className={`game-state-badge badge-${status}`}>
-            {status === 'waiting' ? '⏳ Chờ bắt đầu' : '🔥 Đang diễn ra'}
-          </div>
+
+            {/* Nút Hành Động (Giữa Dưới) */}
+            <div style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', pointerEvents: 'auto', zIndex: 20 }}>
+              <ActionButtons />
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* LAYER 2: MODALS */}
+      {activePropertyModal && !isTokenAnimating && (
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50, pointerEvents: 'auto' }}>
+          <PropertyCardModal />
         </div>
-      </header>
+      )}
 
-      {/* --- MAIN CONTENT GRID (3D SCENE + UI PANELS) --- */}
-      <main className="main-grid-3d">
-        {/* Cột trái: Form gia nhập & Bảng điều khiển hành động & Danh sách người chơi */}
-        <div className="ui-sidebar left-sidebar">
-          <JoinForm />
-          <ActionButtons />
-          <PlayerList />
-        </div>
-
-        {/* Cột giữa: Bàn cờ 3D R3F Canvas */}
-        <div className="scene-container">
-          <Scene3D />
-        </div>
-
-        {/* Cột phải: Khung nhật ký tường thuật thời gian thực */}
-        <div className="ui-sidebar right-sidebar">
-          <LogPanel />
-        </div>
-      </main>
-
-      {/* Thẻ đất 2D Overlay tách biệt khỏi không gian 3D (Khóa khi Token đang nhảy) */}
-      {activePropertyModal && !isTokenAnimating && <PropertyCardModal />}
-
-      {/* --- FOOTER --- */}
-      <footer className="app-footer">
-        <p>
-          &copy; 2026 Monopoly Xuyên Việt Studio &bull; Tuân thủ tuyệt đối quy tắc <strong>SERVER IS KING &amp; GREYBOXING</strong> &bull; Node.js Authoritative Server (Port 3000)
-        </p>
-      </footer>
     </div>
   );
 }

@@ -7,46 +7,52 @@ import Board, { getTileCoordinates } from './Board';
 import PlayerTokens from './PlayerToken';
 
 /**
- * Component Dual-State Follow Camera: Over-The-Shoulder (nhìn từ sau lưng theo forwardDir) vs Stopped (Siêu thấp y=1.2 cận cảnh)
+ * Component Dual/Tri-State Follow Camera: Lobby (toàn cảnh), Moving (Over-The-Shoulder), Stopped (Góc chéo 45 độ y=5.5 cận cảnh thấy rõ texture)
  */
-function FollowCamera({ targetPos }) {
+function FollowCamera() {
   const { camera, controls } = useThree();
   const isTokenAnimating = useGameStore((state) => state.isTokenAnimating);
+  const gameStatus = useGameStore((state) => state.gameStatus);
+  const hasJoined = useGameStore((state) => state.hasJoined);
+  const cameraFocusPos = useGameStore((state) => state.cameraFocusPos);
 
   // Tính toán các hướng
-  const centerDir = new THREE.Vector3(targetPos[0], 0, targetPos[2]).normalize();
+  const centerDir = new THREE.Vector3(cameraFocusPos[0], 0, cameraFocusPos[2]).normalize();
   if (centerDir.lengthSq() === 0) centerDir.set(0, 0, 1);
   const up = new THREE.Vector3(0, 1, 0);
-  // forwardDir chính là hướng chạy dọc theo mép bàn cờ (Tiếp tuyến)
   const forwardDir = new THREE.Vector3().crossVectors(centerDir, up).normalize();
 
   const vecTarget = new THREE.Vector3();
   const vecCamera = new THREE.Vector3();
 
-  if (isTokenAnimating) {
-    // TRẠNG THÁI MOVING: Over-the-shoulder (Từ sau lưng, nhìn về phía trước)
-    // Điểm nhìn: Phía trước Token một chút
-    vecTarget.set(targetPos[0] + forwardDir.x * 2, targetPos[1] + 1, targetPos[2] + forwardDir.z * 2);
-    // Camera: Lùi ra sau Token, hơi vếch ra ngoài mép, và cao lên
+  // 1. TRẠNG THÁI LOBBY / IDLE (Chưa bắt đầu game)
+  if (!hasJoined || gameStatus === 'waiting') {
+    vecTarget.set(0, 0, 0); // Nhìn thẳng vào tâm bàn cờ
+    vecCamera.set(0, 14, 20); // Góc chéo từ trên cao, bao quát toàn bộ sa bàn
+  } 
+  // 2. TRẠNG THÁI MOVING (Đang di chuyển)
+  else if (isTokenAnimating) {
+    vecTarget.set(cameraFocusPos[0] + forwardDir.x * 2, cameraFocusPos[1] + 1, cameraFocusPos[2] + forwardDir.z * 2);
     vecCamera.set(
-      targetPos[0] - forwardDir.x * 6 + centerDir.x * 3,
-      targetPos[1] + 6,
-      targetPos[2] - forwardDir.z * 6 + centerDir.z * 3
+      cameraFocusPos[0] - forwardDir.x * 5 + centerDir.x * 2,
+      cameraFocusPos[1] + 7,
+      cameraFocusPos[2] - forwardDir.z * 5 + centerDir.z * 2
     );
-  } else {
-    // TRẠNG THÁI STOPPED: Cực kỳ sát mặt đất, zoom cận cảnh mặt tiền ô đất
-    vecTarget.set(targetPos[0] - centerDir.x * 1, targetPos[1] + 0.5, targetPos[2] - centerDir.z * 1);
+  } 
+  // 3. TRẠNG THÁI STOPPED (Đứng im tại ô)
+  else {
+    // NÂNG CAO GÓC NHÌN ĐỂ THẤY RÕ TEXTURE Ô ĐẤT
+    vecTarget.set(cameraFocusPos[0] - centerDir.x * 1.5, cameraFocusPos[1] + 0.5, cameraFocusPos[2] - centerDir.z * 1.5);
     vecCamera.set(
-      targetPos[0] + centerDir.x * 5.5, // Gần hơn nữa
-      targetPos[1] + 1.2,               // Rất sát mặt đất
-      targetPos[2] + centerDir.z * 5.5
+      cameraFocusPos[0] + centerDir.x * 6.5, 
+      cameraFocusPos[1] + 5.5, // TĂNG LÊN 5.5 ĐỂ NHÌN CHÉO XUỐNG 45 ĐỘ
+      cameraFocusPos[2] + centerDir.z * 6.5
     );
   }
 
   useFrame((state, delta) => {
     if (controls) {
-      // Làm mượt chuyển động Camera
-      const lerpSpeed = isTokenAnimating ? 2 : 1.5;
+      const lerpSpeed = (!hasJoined || gameStatus === 'waiting') ? 1.0 : (isTokenAnimating ? 2.5 : 1.5);
       controls.target.lerp(vecTarget, lerpSpeed * delta);
       camera.position.lerp(vecCamera, lerpSpeed * delta);
       controls.update();
@@ -78,23 +84,25 @@ export default function Scene3D() {
   ];
 
   return (
-    <div className="scene-3d-wrapper" style={{ width: '100%', height: '100%', position: 'relative', minHeight: '540px' }}>
+    <div className="scene-3d-wrapper" style={{ width: '100vw', height: '100vh', position: 'relative' }}>
       <Canvas
+        className="w-full h-full block"
+        style={{ width: '100vw', height: '100vh', display: 'block' }}
         shadows
         dpr={[1, 2]} // Khử răng cưa tối đa và sắc nét trên màn hình Retina / High DPI
         camera={{ position: [0, 4, 12], fov: 35, near: 0.1, far: 200 }}
         gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true, powerPreference: 'high-performance' }}
-        style={{ borderRadius: '16px', background: '#e0f2fe' }}
       >
-        <color attach="background" args={['#e0f2fe']} />
-        {/* Hệ thống ánh sáng ban ngày Diorama tươi sáng */}
-        <ambientLight intensity={0.85} color="#f8fafc" />
+        <color attach="background" args={['#bae6fd']} /> {/* Màu sky-200 */}
+        {/* Hệ thống ánh sáng ban ngày Diorama tươi sáng rực rỡ */}
+        <ambientLight intensity={1.2} color="#f8fafc" />
         <directionalLight
-          position={[25, 40, 30]}
-          intensity={1.6}
+          position={[10, 15, 10]}
+          intensity={1.8}
           color="#ffffff"
           castShadow
-          shadow-mapSize={[2048, 2048]}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
           shadow-camera-left={-28}
           shadow-camera-right={28}
           shadow-camera-top={28}
@@ -103,7 +111,7 @@ export default function Scene3D() {
         <pointLight position={[-20, 20, -20]} intensity={0.6} color="#38bdf8" />
 
         {/* Dynamic Follow Camera tự động bám đuổi Token */}
-        <FollowCamera targetPos={targetPos} />
+        <FollowCamera />
 
         <Suspense fallback={null}>
           <Board />

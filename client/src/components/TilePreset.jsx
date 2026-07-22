@@ -2,6 +2,9 @@ import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import * as THREE from 'three';
 import { useTexture, Text } from '@react-three/drei';
 import { TOKEN_COLORS } from './PlayerToken';
+import boardTiles from '../../../data/board.json';
+
+export const TILES = boardTiles;
 
 const FALLBACK_COLORS = {
   // Theo Group (Đất thường)

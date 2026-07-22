@@ -11,3 +11,6 @@ logs
 # Ignore large PNG/JPG textures in public/texture, only commit WebP
 client/public/texture/*.png
 client/public/texture/*.jpg
+*.png
+*.jpg
+cards/
